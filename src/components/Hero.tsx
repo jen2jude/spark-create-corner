@@ -8,6 +8,7 @@ export function Hero() {
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="max-w-2xl">
+            <Logo size="lg" className="mb-8" />
             <Badge variant="outline" className="mb-6 rounded-full px-3 py-1 text-xs font-medium">
               Early access
             </Badge>
