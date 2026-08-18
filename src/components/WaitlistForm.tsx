@@ -60,7 +60,7 @@ const challenges = [
 
 export function WaitlistForm() {
   const submit = useServerFn(submitWaitlistEntry);
-  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
@@ -79,27 +79,13 @@ export function WaitlistForm() {
     setLoading(true);
     try {
       await submit({ data: form });
-      setSubmitted(true);
+      await navigate({ to: "/thanks" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
-
-  if (submitted) {
-    return (
-      <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
-          <CheckCircle2 className="h-6 w-6 text-accent" />
-        </div>
-        <h3 className="mt-4 font-serif text-xl font-semibold text-foreground">You're on the list</h3>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Thanks for your interest in Oventric Mail. We'll be in touch when early access opens.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
