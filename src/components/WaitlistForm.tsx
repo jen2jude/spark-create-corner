@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useServerFn, useNavigate } from "@tanstack/react-start";
+import { useServerFn } from "@tanstack/react-start";
+import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
