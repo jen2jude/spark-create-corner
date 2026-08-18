@@ -57,6 +57,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-hero: var(--hero);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-muted: var(--hero-muted);
 }
 
 :root {
@@ -93,6 +96,11 @@
   --sidebar-accent-foreground: oklch(0.22 0 0);
   --sidebar-border: oklch(0.91 0.01 85);
   --sidebar-ring: oklch(0.55 0.14 50);
+  --hero: oklch(0.955 0.038 92);
+  --hero-foreground: oklch(0.18 0.01 60);
+  --hero-muted: oklch(0.45 0.02 70);
+  --shadow-lift: 0 24px 60px -28px oklch(0.3 0.05 70 / 0.35);
+  --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .dark {
@@ -128,6 +136,9 @@
   --sidebar-accent-foreground: oklch(0.985 0.003 95);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.55 0.14 50);
+  --hero: oklch(0.24 0.02 80);
+  --hero-foreground: oklch(0.97 0.01 90);
+  --hero-muted: oklch(0.75 0.01 90);
 }
 
 @layer base {
@@ -151,4 +162,25 @@
     font-family: var(--font-serif);
     letter-spacing: -0.02em;
   }
+}
+
+@layer base {
+  a, button {
+    transition: color 200ms var(--ease-fluid), background-color 200ms var(--ease-fluid),
+      border-color 200ms var(--ease-fluid), opacity 200ms var(--ease-fluid),
+      transform 200ms var(--ease-fluid), box-shadow 200ms var(--ease-fluid);
+  }
+}
+
+@utility shadow-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@utility animate-rise {
+  animation: rise-in 700ms var(--ease-fluid) both;
 }
