@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { ProductPreview } from "@/components/ProductPreview";
 import { FromIdeaToResult } from "@/components/FromIdeaToResult";
 import { Features } from "@/components/Features";
 import { AudienceSegments } from "@/components/AudienceSegments";
 import { WaitlistSection } from "@/components/WaitlistSection";
+import { StickyContact } from "@/components/StickyContact";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
