@@ -29,11 +29,13 @@ function Index() {
       <Header />
       <main>
         <Hero />
+        <ProductPreview />
         <FromIdeaToResult />
         <Features />
         <AudienceSegments />
         <WaitlistSection />
       </main>
+      <StickyContact />
       <Footer />
     </div>
   );
