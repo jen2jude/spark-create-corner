@@ -12,7 +12,7 @@ const waitlistSchema = z.object({
 });
 
 export const submitWaitlistEntry = createServerFn({ method: "POST" })
-  .inputValidator((data) => waitlistSchema.parse(data))
+  .validator((data) => waitlistSchema.parse(data))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
