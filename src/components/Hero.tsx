@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, MousePointerClick, Shield, BarChart3, Mail, Zap, Clock } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export function Hero() {
   return (
@@ -8,6 +9,7 @@ export function Hero() {
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="max-w-2xl">
+            <Logo size="lg" className="mb-8" />
             <Badge variant="outline" className="mb-6 rounded-full px-3 py-1 text-xs font-medium">
               Early access
             </Badge>
