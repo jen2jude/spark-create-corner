@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, MousePointerClick, Shield, BarChart3, Mail, Zap, Clock } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export function Hero() {
   return (
