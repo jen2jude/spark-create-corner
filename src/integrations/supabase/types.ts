@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      waitlist: {
+        Row: {
+          audience_size: string | null
+          biggest_challenge: string | null
+          company: string | null
+          created_at: string
+          current_email_tool: string | null
+          email: string
+          id: string
+          name: string
+          primary_use_case: string | null
+          status: string
+        }
+        Insert: {
+          audience_size?: string | null
+          biggest_challenge?: string | null
+          company?: string | null
+          created_at?: string
+          current_email_tool?: string | null
+          email: string
+          id?: string
+          name: string
+          primary_use_case?: string | null
+          status?: string
+        }
+        Update: {
+          audience_size?: string | null
+          biggest_challenge?: string | null
+          company?: string | null
+          created_at?: string
+          current_email_tool?: string | null
+          email?: string
+          id?: string
+          name?: string
+          primary_use_case?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
