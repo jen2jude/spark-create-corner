@@ -6,6 +6,7 @@ import {
   DesignScreen,
   AnalyticsScreen,
   DeliveryScreen,
+  ControlsScreen,
 } from "@/components/AppScreens";
 
 const tabs = [
@@ -38,6 +39,13 @@ const tabs = [
     body: "Authentication, suppression, bounce handling and warm-up run in the background. Oventric asks for what it needs in plain language and folds the SPF, DKIM and DMARC detail away until you want to see it.",
   },
   {
+    id: "controls",
+    label: "Controls",
+    screen: ControlsScreen,
+    heading: "Simple by default, powerful when needed",
+    body: "Nothing is taken away. Campaign settings, sender configuration, authentication, audience rules, tracking, automation, sending limits, analytics, integrations and data controls all sit one click behind the guided flow — with sensible defaults already applied.",
+  },
+  {
     id: "analytics",
     label: "Analytics",
     screen: AnalyticsScreen,
@@ -59,7 +67,7 @@ export function ProductTour() {
           Build a campaign in minutes, not afternoons
         </h2>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Five surfaces, one continuous flow. Every step is visible, editable, and reversible.
+          Six surfaces, one continuous flow. Every step is visible, editable, and reversible.
         </p>
 
         <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-b border-border">
