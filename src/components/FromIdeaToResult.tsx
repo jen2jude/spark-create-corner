@@ -1,13 +1,31 @@
-const steps = [
-  "Tell Oventric your goal",
-  "AI builds the strategy",
-  "Audience verified",
-  "Email designed",
-  "Deliverability checked",
-  "Campaign sent",
-  "Clicks & registrations tracked",
-  "Leads followed up",
-  "Results analyzed",
+const phases = [
+  {
+    label: "Plan",
+    stages: "Audience · Intelligence · Strategy",
+    steps: [
+      { title: "Tell Oventric your goal", body: "Describe the outcome in plain language — registrations, sales, renewals, attendance." },
+      { title: "Strategy is drafted", body: "A campaign plan with messaging, timing, and success measures you can review and edit." },
+      { title: "Audience verified", body: "Contacts are cleaned, segmented, and scored so you only send to people worth reaching." },
+    ],
+  },
+  {
+    label: "Execute",
+    stages: "Campaign · Delivery · Engagement",
+    steps: [
+      { title: "Email designed", body: "Brand-consistent layouts written and built for you, editable down to the sentence." },
+      { title: "Deliverability checked", body: "Authentication, list quality, and send health reviewed before anything leaves." },
+      { title: "Campaign sent", body: "Controlled sending with previews, approvals, and a full record of every decision." },
+    ],
+  },
+  {
+    label: "Convert",
+    stages: "Conversion · Lead · Nurture · Revenue",
+    steps: [
+      { title: "Engagement tracked", body: "Opens, clicks, and registrations attributed to the goal you set at the start." },
+      { title: "Leads followed up", body: "Clear next actions for people who showed intent but did not convert." },
+      { title: "Results analysed", body: "Ask questions of your own campaign data and get answers grounded in results." },
+    ],
+  },
 ];
 
 const spine = [
@@ -25,18 +43,20 @@ const spine = [
 
 export function FromIdeaToResult() {
   return (
-    <section id="workflow" className="px-6 py-24 lg:px-8 lg:py-32">
+    <section id="workflow" className="border-t border-border px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <div className="max-w-3xl">
+          <p className="eyebrow">The journey</p>
+          <h2 className="mt-5 font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             From idea to result
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Oventric doesn't just send emails. It guides the entire journey from a business goal to measurable outcomes.
+          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+            Oventric Mail does not stop at sending. It carries a business goal through every stage that
+            stands between an audience and revenue — with your judgement in the loop at each step.
           </p>
         </div>
 
-        <ol className="mx-auto mt-12 flex max-w-5xl flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-medium uppercase tracking-[0.18em]">
+        <ol className="mt-12 flex flex-wrap items-center gap-x-3 gap-y-3 border-y border-border py-5 text-[0.6875rem] font-medium uppercase tracking-[0.2em]">
           {spine.map((stage, index) => (
             <li key={stage} className="flex items-center gap-3">
               <span className={index === spine.length - 1 ? "text-accent" : "text-muted-foreground"}>
@@ -44,24 +64,30 @@ export function FromIdeaToResult() {
               </span>
               {index < spine.length - 1 && (
                 <span className="text-border" aria-hidden>
-                  →
+                  /
                 </span>
               )}
             </li>
           ))}
         </ol>
 
-
-        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {steps.map((step, index) => (
-            <div
-              key={step}
-              className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-accent/30 hover:shadow-sm"
-            >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/10 text-sm font-semibold text-accent">
-                {index + 1}
-              </span>
-              <p className="font-medium leading-snug text-foreground">{step}</p>
+        <div className="mt-16 grid gap-x-12 gap-y-14 lg:grid-cols-3">
+          {phases.map((phase) => (
+            <div key={phase.label}>
+              <div className="flex items-baseline justify-between border-b border-foreground/15 pb-4">
+                <h3 className="font-serif text-xl font-semibold text-foreground">{phase.label}</h3>
+                <p className="text-[0.6875rem] uppercase tracking-[0.16em] text-muted-foreground">
+                  {phase.stages}
+                </p>
+              </div>
+              <ol className="mt-6 space-y-6">
+                {phase.steps.map((step) => (
+                  <li key={step.title}>
+                    <p className="font-medium leading-snug text-foreground">{step.title}</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
           ))}
         </div>
