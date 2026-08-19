@@ -6,6 +6,7 @@ import { ProblemSection } from "@/components/ProblemSection";
 import { ProductPreview } from "@/components/ProductPreview";
 import { FromIdeaToResult } from "@/components/FromIdeaToResult";
 import { Features } from "@/components/Features";
+import { ComplexityAbstraction } from "@/components/ComplexityAbstraction";
 import { Deliverability } from "@/components/Deliverability";
 import { AudienceSegments } from "@/components/AudienceSegments";
 import { TrustBand } from "@/components/TrustBand";
@@ -40,6 +41,7 @@ function Index() {
       <FromIdeaToResult />
       <Features />
       <AudienceSegments />
+      <ComplexityAbstraction />
       <Deliverability />
       <WaitlistSection />
     </MarketingShell>
