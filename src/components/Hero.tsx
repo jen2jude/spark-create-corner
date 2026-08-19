@@ -9,7 +9,7 @@ const proofPoints = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-hero px-6 pb-28 pt-20 lg:px-8 lg:pb-36 lg:pt-28">
+    <section className="relative overflow-hidden bg-hero px-6 pb-20 pt-14 sm:pb-28 sm:pt-20 lg:px-8 lg:pb-36 lg:pt-28">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
@@ -21,17 +21,17 @@ export function Hero() {
         }}
         aria-hidden
       />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
         <div className="animate-rise max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-[0.32em] text-hero-muted">
             Early access
           </p>
-          <h1 className="mt-6 font-sans text-5xl font-extrabold leading-[1.03] tracking-[-0.03em] text-hero-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="mt-5 font-sans text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-hero-foreground sm:mt-6 sm:text-6xl lg:text-7xl">
             Marketing campaigns,
             <br />
             guided by conversation
           </h1>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-hero-muted">
+          <p className="mt-6 max-w-xl text-base sm:mt-7 sm:text-lg leading-relaxed text-hero-muted">
             Tell Oventric Mail what you want to achieve. It takes you from strategy and verified
             audience to design, delivery, deliverability, and measurable results — in one calm
             workspace.
