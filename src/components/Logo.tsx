@@ -5,20 +5,22 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   className?: string;
   size?: "sm" | "lg";
-  /** Animate the RGB O into an envelope and back. Use selectively. */
+  /** Animate the RGB O into an envelope. Use selectively. */
   animated?: boolean;
+  /** Whether to play the animation. When false, the mark sits in its final envelope state. */
+  animate?: boolean;
   /** Unique suffix when more than one animated mark is on the page. */
   idSuffix?: string;
 }
 
-export function Logo({ className, size = "sm", animated = false, idSuffix }: LogoProps) {
+export function Logo({ className, size = "sm", animated = false, animate = true, idSuffix }: LogoProps) {
   const isLarge = size === "lg";
   const markClass = cn("shrink-0 object-contain", isLarge ? "h-14 w-14" : "h-9 w-9");
 
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
       {animated ? (
-        <AnimatedMark className={markClass} idSuffix={idSuffix} />
+        <AnimatedMark className={markClass} idSuffix={idSuffix} animate={animate} />
       ) : (
         <img src={mark.url} alt="Oventric Mail logo" className={markClass} />
       )}
