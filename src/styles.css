@@ -184,3 +184,40 @@
 @utility animate-rise {
   animation: rise-in 700ms var(--ease-fluid) both;
 }
+
+/* Brand mark: O -> motion -> Mail -> O. Subtle, slow, non-looping-feel loop. */
+@keyframes mark-ring-trace {
+  0% { stroke-dashoffset: 119.4; }
+  28% { stroke-dashoffset: 0; }
+  90% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -119.4; }
+}
+
+@keyframes mark-envelope-reveal {
+  0%, 42% { opacity: 0; transform: scale(0.94); }
+  56%, 76% { opacity: 1; transform: scale(1); }
+  90%, 100% { opacity: 0; transform: scale(0.94); }
+}
+
+.mark-ring {
+  stroke-dasharray: 119.4;
+  stroke-dashoffset: 0;
+  animation: mark-ring-trace 9s var(--ease-fluid) infinite;
+}
+
+.mark-envelope {
+  opacity: 0;
+  transform-origin: 24px 24px;
+  animation: mark-envelope-reveal 9s var(--ease-fluid) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark-ring,
+  .mark-envelope {
+    animation: none;
+  }
+  .mark-envelope {
+    opacity: 1;
+  }
+}
+
