@@ -15,23 +15,35 @@ type BaseFieldProps = {
 
 function FieldShell({
   id,
+  descId,
   label,
   hint,
   error,
   required,
   className,
   children,
-}: BaseFieldProps & { id: string; children: ReactNode }) {
+}: BaseFieldProps & { id: string; descId: string; children: ReactNode }) {
   return (
     <div className={cn("space-y-2", className)}>
       <Label htmlFor={id} className="text-xs font-medium text-foreground">
         {label}
-        {required ? <span className="ml-1 text-accent">*</span> : null}
+        {required ? (
+          <>
+            <span aria-hidden="true" className="ml-1 text-accent">
+              *
+            </span>
+            <span className="sr-only"> (required)</span>
+          </>
+        ) : null}
       </Label>
       {children}
-      {hint && !error ? <p className="text-xs text-muted-foreground">{hint}</p> : null}
+      {hint && !error ? (
+        <p id={descId} className="text-xs text-muted-foreground">
+          {hint}
+        </p>
+      ) : null}
       {error ? (
-        <p role="alert" className="text-xs text-destructive">
+        <p id={descId} role="alert" className="text-xs text-destructive">
           {error}
         </p>
       ) : null}
@@ -51,10 +63,12 @@ export function TextField({
 }: BaseFieldProps &
   React.InputHTMLAttributes<HTMLInputElement> & { multiline?: boolean | undefined }) {
   const id = useId();
-  const describedBy = error ?? hint ? `${id}-desc` : undefined;
+  const descId = `${id}-desc`;
+  const describedBy = error || hint ? descId : undefined;
   return (
     <FieldShell
       id={id}
+      descId={descId}
       label={label}
       hint={hint}
       error={error}
@@ -96,9 +110,12 @@ export function SelectField({
     options: ReadonlyArray<{ value: string; label: string }>;
   }) {
   const id = useId();
+  const descId = `${id}-desc`;
+  const describedBy = error || hint ? descId : undefined;
   return (
     <FieldShell
       id={id}
+      descId={descId}
       label={label}
       hint={hint}
       error={error}
@@ -108,8 +125,9 @@ export function SelectField({
       <select
         id={id}
         aria-invalid={!!error}
+        aria-describedby={describedBy}
         required={required}
-        className="h-9 w-full rounded-md border border-input bg-card px-3 text-sm text-foreground"
+        className="min-h-11 w-full rounded-md border border-input bg-card px-3 text-sm text-foreground"
         {...props}
       >
         {options.map((o) => (
