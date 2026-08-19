@@ -17,10 +17,10 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Oventric Mail — Turn Your Audience Into Outcomes" },
-      { name: "description", content: "Oventric Mail is a complete marketing campaign workspace powered by conversation. From strategy to audience, design, delivery, and analytics." },
-      { property: "og:title", content: "Oventric Mail — Turn Your Audience Into Outcomes" },
-      { property: "og:description", content: "Oventric Mail is a complete marketing campaign workspace powered by conversation. From strategy to audience, design, delivery, and analytics." },
+      { title: "Oventric Mail — From Audience to Outcome" },
+      { name: "description", content: "Tell Oventric what you want to achieve. From audience to outcome, Oventric Mail brings strategy, creation, delivery, tracking and follow-up into one intelligent workspace." },
+      { property: "og:title", content: "Oventric Mail — From Audience to Outcome" },
+      { property: "og:description", content: "Tell Oventric what you want to achieve. From audience to outcome, Oventric Mail brings strategy, creation, delivery, tracking and follow-up into one intelligent workspace." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
