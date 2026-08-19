@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StrategistRouteImport } from './routes/strategist'
 import { Route as ThanksRouteImport } from './routes/thanks'
 import { Route as AppIndexRouteImport } from './routes/app.index'
@@ -38,6 +40,16 @@ const AppRoute = AppRouteImport.update({
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StrategistRoute = StrategistRouteImport.update({
@@ -105,6 +117,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/design-system': typeof DesignSystemRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
   '/app/analytics': typeof AppAnalyticsRoute
@@ -121,6 +135,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/design-system': typeof DesignSystemRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
   '/app/analytics': typeof AppAnalyticsRoute
@@ -139,6 +155,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/design-system': typeof DesignSystemRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
   '/app/analytics': typeof AppAnalyticsRoute
@@ -158,6 +176,8 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/design-system'
+    | '/login'
+    | '/signup'
     | '/strategist'
     | '/thanks'
     | '/app/analytics'
@@ -174,6 +194,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/design-system'
+    | '/login'
+    | '/signup'
     | '/strategist'
     | '/thanks'
     | '/app/analytics'
@@ -191,6 +213,8 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/design-system'
+    | '/login'
+    | '/signup'
     | '/strategist'
     | '/thanks'
     | '/app/analytics'
@@ -209,6 +233,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   DesignSystemRoute: typeof DesignSystemRoute
+  LoginRoute: typeof LoginRoute
+  SignupRoute: typeof SignupRoute
   StrategistRoute: typeof StrategistRoute
   ThanksRoute: typeof ThanksRoute
 }
@@ -234,6 +260,20 @@ declare module '@tanstack/react-router' {
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/strategist': {
@@ -355,6 +395,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   DesignSystemRoute: DesignSystemRoute,
+  LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
   StrategistRoute: StrategistRoute,
   ThanksRoute: ThanksRoute,
 }
