@@ -48,9 +48,11 @@ export function EmailPreview({
           <div className="pt-2">
             <span className="inline-flex rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background">
               {draft.ctaLabel}
+              <span className="sr-only"> (button inside the email — not active in this preview)</span>
             </span>
           </div>
         ) : null}
+
         {draft.signoff ? <Text variant="muted">{draft.signoff}</Text> : null}
       </div>
       {footer ? (
