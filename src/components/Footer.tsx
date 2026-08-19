@@ -1,20 +1,21 @@
+import { Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 
 const columns = [
   {
     heading: "Product",
     links: [
-      { label: "How it works", href: "#workflow" },
-      { label: "Workspace", href: "#product" },
-      { label: "Capabilities", href: "#features" },
-      { label: "Who it is for", href: "#audience" },
+      { label: "Product", to: "/product" },
+      { label: "How it works", to: "/how-it-works" },
+      { label: "Deliverability", to: "/deliverability" },
+      { label: "Questions", to: "/faq" },
     ],
   },
   {
     heading: "Access",
     links: [
-      { label: "Request early access", href: "#waitlist" },
-      { label: "Talk to us", href: "#waitlist" },
+      { label: "Request early access", to: "/early-access" },
+      { label: "Sign in", to: "/login" },
     ],
   },
 ];
@@ -42,12 +43,12 @@ export function Footer() {
               <ul className="mt-4 space-y-3">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.to}
                       className="text-sm text-muted-foreground hover:text-foreground"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
