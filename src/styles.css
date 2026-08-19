@@ -147,8 +147,21 @@
     border-color: var(--color-border);
   }
 
-  html {
-    scroll-behavior: smooth;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Visible, consistent keyboard focus everywhere — never removed for aesthetics. */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  /* Anchored sections clear the sticky header for keyboard and hash navigation. */
+  [id] {
+    scroll-margin-top: 7rem;
   }
 
   body {
