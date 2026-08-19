@@ -204,6 +204,28 @@
   animation: rise-in 700ms var(--ease-fluid) both;
 }
 
+/* Progress that grows into place, so a number reads as movement toward a goal. */
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@utility animate-progress {
+  transform-origin: left center;
+  animation: progress-grow 900ms var(--ease-fluid) both;
+}
+
+/* Gentle hover for interactive surfaces: lift, never bounce. */
+@utility hover-lift {
+  transition: transform 200ms var(--ease-fluid), box-shadow 200ms var(--ease-fluid),
+    border-color 200ms var(--ease-fluid);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+    border-color: color-mix(in oklab, var(--color-foreground) 20%, transparent);
+  }
+}
+
 /* Brand mark: O -> motion -> Mail. Plays once on page load, then holds on the envelope. */
 @keyframes mark-ring-trace {
   0% { stroke-dashoffset: 119.4; }
@@ -247,6 +269,15 @@
   }
   .mark-envelope {
     opacity: 1;
+  }
+
+  /* Meaning survives without movement. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

@@ -149,8 +149,12 @@ export function FunnelChart() {
           </div>
           <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-muted">
             <div
-              className="h-full rounded-full bg-accent"
-              style={{ width: `${s.pct}%`, opacity: i === steps.length - 1 ? 0.95 : 0.35 }}
+              className="animate-progress h-full rounded-full bg-accent"
+              style={{
+                width: `${s.pct}%`,
+                opacity: i === steps.length - 1 ? 0.95 : 0.35,
+                animationDelay: `${i * 90}ms`,
+              }}
             />
           </div>
         </div>
