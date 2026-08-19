@@ -244,6 +244,25 @@ export function StrategistDemo() {
 
   useEffect(() => clearTimers, []);
 
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting) && !started.current) {
+          started.current = true;
+          run(0, scenarios[0]!.prompt);
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   const run = (index: number, prompt: string) => {
     clearTimers();
     setActive(index);
@@ -273,7 +292,7 @@ export function StrategistDemo() {
   }, [phase, revealed, total]);
 
   return (
-    <section id="strategist" className="border-t border-border bg-secondary px-6 py-24 lg:px-8 lg:py-32">
+    <section ref={sectionRef} id="strategist" className="border-t border-border bg-secondary px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-xs font-medium uppercase tracking-[0.32em] text-muted-foreground">
