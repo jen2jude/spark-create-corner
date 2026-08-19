@@ -79,7 +79,7 @@ export function ProductTour() {
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tab.body}</p>
           </div>
 
-          <div key={tab.id} className="animate-fade-in">
+          <div key={`${tab.id}-screen`} className="animate-fade-in">
             <Screen />
           </div>
         </div>

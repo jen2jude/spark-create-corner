@@ -8,6 +8,12 @@
  */
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import {
+  ProgressChart,
+  SegmentChart,
+  FunnelChart,
+  ReadingPanel,
+} from "@/components/AnalyticsCharts";
 
 const nav = [
   "Strategy",
@@ -283,39 +289,50 @@ export function AnalyticsScreen() {
       title="Event registration campaign"
       subtitle="Status: sending · send 2 of 4 · measured against 500 registrations"
     >
-      <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <Stat label="Delivered" value="7,481" meta="98.3% delivery rate" />
-        <Stat label="Opens" value="3,214" meta="43.0%" />
-        <Stat label="Clicks" value="962" meta="12.9%" />
+        <Stat label="Opens" value="3,214" meta="43.0% open rate" />
+        <Stat label="Clicks" value="962" meta="12.9% click rate" />
         <Stat label="Conversions" value="341" meta="registrations" />
         <Stat label="Leads" value="118" meta="sales-ready" />
         <Stat label="Unsubscribes" value="24" meta="0.3%" />
       </div>
 
-      <div className="mt-3 grid gap-3 lg:grid-cols-2">
-        <div className="rounded-lg border border-border/70 bg-background p-3">
-          <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-            Conversions by segment
-          </p>
-          <div className="mt-2.5 space-y-2.5">
-            <Bar label="Past attendees" value="164" pct={82} />
-            <Bar label="Trial signups" value="91" pct={52} />
-            <Bar label="Newsletter, active" value="71" pct={38} />
-            <Bar label="Referrals" value="15" pct={12} />
+      <div className="mt-3 grid gap-3 xl:grid-cols-[1.5fr_1fr]">
+        <div className="space-y-3">
+          <div className="rounded-lg border border-border/70 bg-background p-3">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+              <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                Registrations against objective
+              </p>
+              <p className="text-[11px] text-muted-foreground">341 of 500 · 68%</p>
+            </div>
+            <div className="mt-2">
+              <ProgressChart />
+            </div>
+          </div>
+          <div className="rounded-lg border border-border/70 bg-background p-3">
+            <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              Conversions by segment
+            </p>
+            <div className="mt-2">
+              <SegmentChart />
+            </div>
           </div>
         </div>
         <div className="space-y-3">
           <div className="rounded-lg border border-border/70 bg-background p-3">
             <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              Progress to objective
+              Delivered to converted
             </p>
             <div className="mt-2.5">
-              <Bar label="341 of 500 registrations" value="68%" pct={68} />
+              <FunnelChart />
             </div>
           </div>
-          <Recommendation text="Send the reminder to 2,180 openers who did not click. Historic lift on this segment is 46 registrations." />
+          <ReadingPanel />
         </div>
       </div>
+
     </AppChrome>
   );
 }
