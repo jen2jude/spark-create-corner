@@ -31,6 +31,7 @@ function Index() {
       <main>
         <Hero />
         <ProductPreview />
+        <TrustBand />
         <FromIdeaToResult />
         <Features />
         <AudienceSegments />
