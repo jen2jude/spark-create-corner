@@ -10,13 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as StrategistRouteImport } from './routes/strategist'
 import { Route as ThanksRouteImport } from './routes/thanks'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
+import { Route as AppAudienceRouteImport } from './routes/app.audience'
+import { Route as AppAutomationsRouteImport } from './routes/app.automations'
+import { Route as AppBillingRouteImport } from './routes/app.billing'
+import { Route as AppCampaignsRouteImport } from './routes/app.campaigns'
+import { Route as AppLeadsRouteImport } from './routes/app.leads'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppVerificationRouteImport } from './routes/app.verification'
+import { Route as AppWorkspaceRouteImport } from './routes/app.workspace'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
@@ -34,36 +50,164 @@ const ThanksRoute = ThanksRouteImport.update({
   path: '/thanks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAudienceRoute = AppAudienceRouteImport.update({
+  id: '/audience',
+  path: '/audience',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAutomationsRoute = AppAutomationsRouteImport.update({
+  id: '/automations',
+  path: '/automations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBillingRoute = AppBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCampaignsRoute = AppCampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLeadsRoute = AppLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVerificationRoute = AppVerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppWorkspaceRoute = AppWorkspaceRouteImport.update({
+  id: '/workspace',
+  path: '/workspace',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/design-system': typeof DesignSystemRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/audience': typeof AppAudienceRoute
+  '/app/automations': typeof AppAutomationsRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/campaigns': typeof AppCampaignsRoute
+  '/app/leads': typeof AppLeadsRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app/workspace': typeof AppWorkspaceRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/design-system': typeof DesignSystemRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/audience': typeof AppAudienceRoute
+  '/app/automations': typeof AppAutomationsRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/campaigns': typeof AppCampaignsRoute
+  '/app/leads': typeof AppLeadsRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app/workspace': typeof AppWorkspaceRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/design-system': typeof DesignSystemRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/audience': typeof AppAudienceRoute
+  '/app/automations': typeof AppAutomationsRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/campaigns': typeof AppCampaignsRoute
+  '/app/leads': typeof AppLeadsRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app/workspace': typeof AppWorkspaceRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/design-system' | '/strategist' | '/thanks'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/design-system'
+    | '/strategist'
+    | '/thanks'
+    | '/app/analytics'
+    | '/app/audience'
+    | '/app/automations'
+    | '/app/billing'
+    | '/app/campaigns'
+    | '/app/leads'
+    | '/app/settings'
+    | '/app/verification'
+    | '/app/workspace'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/design-system' | '/strategist' | '/thanks'
-  id: '__root__' | '/' | '/design-system' | '/strategist' | '/thanks'
+  to:
+    | '/'
+    | '/design-system'
+    | '/strategist'
+    | '/thanks'
+    | '/app/analytics'
+    | '/app/audience'
+    | '/app/automations'
+    | '/app/billing'
+    | '/app/campaigns'
+    | '/app/leads'
+    | '/app/settings'
+    | '/app/verification'
+    | '/app/workspace'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/design-system'
+    | '/strategist'
+    | '/thanks'
+    | '/app/analytics'
+    | '/app/audience'
+    | '/app/automations'
+    | '/app/billing'
+    | '/app/campaigns'
+    | '/app/leads'
+    | '/app/settings'
+    | '/app/verification'
+    | '/app/workspace'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   DesignSystemRoute: typeof DesignSystemRoute
   StrategistRoute: typeof StrategistRoute
   ThanksRoute: typeof ThanksRoute
@@ -76,6 +220,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/design-system': {
@@ -99,11 +250,110 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ThanksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/analytics': {
+      id: '/app/analytics'
+      path: '/analytics'
+      fullPath: '/app/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/audience': {
+      id: '/app/audience'
+      path: '/audience'
+      fullPath: '/app/audience'
+      preLoaderRoute: typeof AppAudienceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/automations': {
+      id: '/app/automations'
+      path: '/automations'
+      fullPath: '/app/automations'
+      preLoaderRoute: typeof AppAutomationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/billing': {
+      id: '/app/billing'
+      path: '/billing'
+      fullPath: '/app/billing'
+      preLoaderRoute: typeof AppBillingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/campaigns': {
+      id: '/app/campaigns'
+      path: '/campaigns'
+      fullPath: '/app/campaigns'
+      preLoaderRoute: typeof AppCampaignsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/leads': {
+      id: '/app/leads'
+      path: '/leads'
+      fullPath: '/app/leads'
+      preLoaderRoute: typeof AppLeadsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/verification': {
+      id: '/app/verification'
+      path: '/verification'
+      fullPath: '/app/verification'
+      preLoaderRoute: typeof AppVerificationRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/workspace': {
+      id: '/app/workspace'
+      path: '/workspace'
+      fullPath: '/app/workspace'
+      preLoaderRoute: typeof AppWorkspaceRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppAudienceRoute: typeof AppAudienceRoute
+  AppAutomationsRoute: typeof AppAutomationsRoute
+  AppBillingRoute: typeof AppBillingRoute
+  AppCampaignsRoute: typeof AppCampaignsRoute
+  AppLeadsRoute: typeof AppLeadsRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppVerificationRoute: typeof AppVerificationRoute
+  AppWorkspaceRoute: typeof AppWorkspaceRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppAudienceRoute: AppAudienceRoute,
+  AppAutomationsRoute: AppAutomationsRoute,
+  AppBillingRoute: AppBillingRoute,
+  AppCampaignsRoute: AppCampaignsRoute,
+  AppLeadsRoute: AppLeadsRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppVerificationRoute: AppVerificationRoute,
+  AppWorkspaceRoute: AppWorkspaceRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   DesignSystemRoute: DesignSystemRoute,
   StrategistRoute: StrategistRoute,
   ThanksRoute: ThanksRoute,
