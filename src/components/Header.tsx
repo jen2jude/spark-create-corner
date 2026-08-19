@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 
@@ -10,6 +10,9 @@ const navLinks = [
 ];
 
 export function Header() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="border-b border-border bg-background">
@@ -28,7 +31,12 @@ export function Header() {
       <div className="border-b border-border/70 bg-hero/95 backdrop-blur supports-[backdrop-filter]:bg-hero/80">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-2">
-            <Logo animated idSuffix="header" />
+            <Logo
+              key={isHome ? "home" : "away"}
+              animated
+              animate={isHome}
+              idSuffix="header"
+            />
           </Link>
           <nav className="hidden items-center gap-8 text-sm font-medium text-hero-muted md:flex">
             {navLinks.map((link) => (
