@@ -1,36 +1,38 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import strategyShot from "@/assets/tour-strategy.jpg";
-import audienceShot from "@/assets/tour-audience.jpg";
-import designShot from "@/assets/tour-design.jpg";
-import analyticsShot from "@/assets/tour-analytics.jpg";
+import {
+  StrategyScreen,
+  AudienceScreen,
+  DesignScreen,
+  AnalyticsScreen,
+} from "@/components/AppScreens";
 
 const tabs = [
   {
     id: "strategy",
     label: "Strategy",
-    image: strategyShot,
+    screen: StrategyScreen,
     heading: "Describe the outcome, review the plan",
     body: "State the result you want in plain language. Oventric Mail returns an objective, messaging angles, a send cadence, and the measures it will judge success by — all editable before anything moves.",
   },
   {
     id: "audience",
     label: "Audience",
-    image: audienceShot,
+    screen: AudienceScreen,
     heading: "Know who is worth reaching",
     body: "Import from CSV, CRM, or events. Contacts are verified, segmented, and scored on engagement, so risky addresses stay out of the send and your best segments get the attention.",
   },
   {
     id: "design",
     label: "Design",
-    image: designShot,
+    screen: DesignScreen,
     heading: "Emails written and built for you",
     body: "Brand-consistent layouts generated from your goal, editable down to the sentence. No HTML, no drag-and-drop archaeology — just a clean canvas with the controls that matter.",
   },
   {
     id: "analytics",
     label: "Analytics",
-    image: analyticsShot,
+    screen: AnalyticsScreen,
     heading: "Results tied back to the goal",
     body: "Delivered, opened, clicked, converted — attributed to the objective you set at the start. Ask questions of your own campaign data and get answers grounded in stored results.",
   },
@@ -39,6 +41,7 @@ const tabs = [
 export function ProductTour() {
   const [active, setActive] = useState(0);
   const tab = tabs[active] ?? tabs[0];
+  const Screen = tab.screen;
 
   return (
     <section id="product" className="border-t border-border bg-secondary/50 px-6 py-24 lg:px-8 lg:py-32">
@@ -76,16 +79,8 @@ export function ProductTour() {
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tab.body}</p>
           </div>
 
-          <div className="overflow-hidden rounded-xl border border-border bg-card shadow-soft">
-            <img
-              key={tab.image}
-              src={tab.image}
-              alt={`Oventric Mail ${tab.label.toLowerCase()} view`}
-              loading="lazy"
-              width={1440}
-              height={912}
-              className="animate-fade-in block h-auto w-full"
-            />
+          <div key={tab.id} className="animate-fade-in">
+            <Screen />
           </div>
         </div>
       </div>
