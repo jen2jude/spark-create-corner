@@ -61,10 +61,10 @@ export function ProgressChart() {
   return (
     <div className="h-[150px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 6, right: 4, bottom: 0, left: -18 }}>
+        <AreaChart data={data} margin={{ top: 6, right: 6, bottom: 0, left: 0 }}>
           <CartesianGrid stroke="var(--border)" strokeOpacity={0.5} vertical={false} />
           <XAxis dataKey="day" {...axis} axisLine={false} />
-          <YAxis {...axis} axisLine={false} width={38} />
+          <YAxis {...axis} axisLine={false} width={30} domain={[0, 500]} ticks={[0, 250, 500]} />
           <Tooltip
             content={<ChartTooltip suffix="registrations" />}
             cursor={{ stroke: "var(--border)" }}
@@ -97,7 +97,7 @@ export function SegmentChart() {
   return (
     <div className="h-[150px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} layout="vertical" margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
+        <BarChart data={data} layout="vertical" margin={{ top: 4, right: 14, bottom: 0, left: 0 }}>
           <CartesianGrid stroke="var(--border)" strokeOpacity={0.5} horizontal={false} />
           <XAxis type="number" {...axis} axisLine={false} />
           <YAxis
@@ -105,7 +105,8 @@ export function SegmentChart() {
             dataKey="segment"
             {...axis}
             axisLine={false}
-            width={94}
+            width={104}
+            interval={0}
           />
           <Tooltip
             content={<ChartTooltip suffix="conversions" />}
@@ -139,9 +140,9 @@ export function FunnelChart() {
     <div className="space-y-2.5">
       {steps.map((s, i) => (
         <div key={s.label}>
-          <div className="flex items-baseline justify-between text-xs">
+          <div className="flex items-baseline justify-between gap-3 text-xs">
             <span className="text-muted-foreground">{s.label}</span>
-            <span className="text-foreground">
+            <span className="whitespace-nowrap text-foreground">
               {s.value.toLocaleString()}{" "}
               <span className="text-muted-foreground">({s.pct}%)</span>
             </span>
