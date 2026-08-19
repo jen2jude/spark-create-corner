@@ -8,8 +8,9 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/s
 const navLinks = [
   { to: "/product", label: "Product" },
   { to: "/how-it-works", label: "How it works" },
+  { to: "/who-its-for", label: "Who it's for" },
   { to: "/deliverability", label: "Deliverability" },
-  { to: "/faq", label: "FAQ" },
+  { to: "/early-access", label: "Early Access" },
 ] as const;
 
 export function Header() {
@@ -20,15 +21,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="hidden border-b border-border bg-background sm:block">
-        <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-6 text-xs text-muted-foreground lg:px-8">
+        <div className="mx-auto flex h-10 max-w-7xl items-center px-6 text-xs text-muted-foreground lg:px-8">
           <span className="font-medium uppercase tracking-[0.28em]">
             Oventric <span className="hidden sm:inline text-muted-foreground/70">· ecosystem</span>
           </span>
-
-          <div className="flex items-center gap-6">
-            <Link to="/early-access" className="hover:text-foreground">Early access</Link>
-            <Link to="/login" className="font-medium text-accent hover:opacity-80">Sign in</Link>
-          </div>
         </div>
       </div>
 
@@ -54,14 +50,17 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link to="/strategist" className="hover:text-hero-foreground">
-              Workspace
-            </Link>
           </nav>
 
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="flex shrink-0 items-center gap-3">
+            <Link
+              to="/login"
+              className="hidden text-sm font-medium text-hero-muted hover:text-hero-foreground md:block"
+            >
+              Sign in
+            </Link>
             <Button className="hidden rounded-full px-5 lg:inline-flex" asChild>
-              <Link to="/early-access">Request early access</Link>
+              <Link to="/early-access">Join Early Access</Link>
             </Button>
 
             <Sheet open={open} onOpenChange={setOpen}>
@@ -78,13 +77,6 @@ export function Header() {
               <SheetContent side="right" className="w-[85vw] max-w-sm px-6 py-8">
                 <SheetTitle className="sr-only">Menu</SheetTitle>
                 <nav aria-label="Mobile" className="mt-6 flex flex-col gap-1 text-base font-medium text-foreground">
-                  <Link
-                    to="/strategist"
-                    onClick={() => setOpen(false)}
-                    className="border-b border-border py-3"
-                  >
-                    Workspace
-                  </Link>
                   {navLinks.map((link) => (
                     <Link
                       key={link.to}
@@ -95,10 +87,17 @@ export function Header() {
                       {link.label}
                     </Link>
                   ))}
+                  <Link
+                    to="/login"
+                    onClick={() => setOpen(false)}
+                    className="border-b border-border py-3"
+                  >
+                    Sign in
+                  </Link>
                 </nav>
                 <Button className="mt-8 w-full rounded-full" asChild>
                   <Link to="/early-access" onClick={() => setOpen(false)}>
-                    Request early access
+                    Join Early Access
                   </Link>
                 </Button>
               </SheetContent>
