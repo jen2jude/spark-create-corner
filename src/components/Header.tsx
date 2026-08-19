@@ -3,7 +3,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 const navLinks = [
   { href: "#product", label: "Product" },
@@ -35,7 +35,7 @@ export function Header() {
 
       <div className="border-b border-border/70 bg-hero/95 backdrop-blur supports-[backdrop-filter]:bg-hero/80">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <Link to="/" className="flex min-w-0 items-center gap-2">
+          <Link to="/" aria-label="Oventric Mail home" className="flex min-w-0 items-center gap-2">
             <Logo
               key={isHome ? "home" : "away"}
               animated
@@ -44,7 +44,7 @@ export function Header() {
             />
           </Link>
 
-          <nav className="hidden min-w-0 items-center gap-5 text-sm font-medium text-hero-muted md:flex lg:gap-8">
+          <nav aria-label="Main" className="hidden min-w-0 items-center gap-5 text-sm font-medium text-hero-muted md:flex lg:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -69,13 +69,15 @@ export function Header() {
                 <button
                   type="button"
                   aria-label="Open menu"
+                  aria-expanded={open}
                   className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-hero-muted/30 text-hero-foreground md:hidden"
                 >
                   <Menu className="h-5 w-5" />
                 </button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[85vw] max-w-sm px-6 py-8">
-                <nav className="mt-6 flex flex-col gap-1 text-base font-medium text-foreground">
+                <SheetTitle className="sr-only">Menu</SheetTitle>
+                <nav aria-label="Mobile" className="mt-6 flex flex-col gap-1 text-base font-medium text-foreground">
                   <Link
                     to="/strategist"
                     onClick={() => setOpen(false)}
