@@ -1,3 +1,4 @@
+import { SectionHeader } from "@/components/SectionHeader";
 import { Store, User, Briefcase, Building2, GraduationCap, Users } from "lucide-react";
 
 const audiences = [
@@ -37,15 +38,11 @@ export function AudienceSegments() {
   return (
     <section id="audience" className="border-t border-border bg-card px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="eyebrow">Who it is for</p>
-          <h2 className="mt-5 font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Built for every audience owner
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Whether you hold 500 contacts or 500,000, the work is the same — and Oventric Mail carries it.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Who it is for"
+          title="Built for every audience owner"
+          lede="Whether you hold 500 contacts or 500,000, the work is the same — and Oventric Mail carries it."
+        />
 
         <div className="mt-16 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {audiences.map((audience) => (

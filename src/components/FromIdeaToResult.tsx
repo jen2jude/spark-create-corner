@@ -1,3 +1,4 @@
+import { SectionHeader } from "@/components/SectionHeader";
 const phases = [
   {
     label: "Plan",
@@ -45,16 +46,12 @@ export function FromIdeaToResult() {
   return (
     <section id="workflow" className="border-t border-border bg-card px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="eyebrow">The journey</p>
-          <h2 className="mt-5 font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            From idea to result
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Oventric Mail does not stop at sending. It carries a business goal through every stage that
-            stands between an audience and revenue — with your judgement in the loop at each step.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="The journey"
+          title="From idea to result"
+          lede="Oventric Mail does not stop at sending. It carries a business goal through every stage that stands between an audience and revenue — with your judgement in the loop at each step."
+          meta="Ten stages, one goal"
+        />
 
         <ol className="mt-12 flex flex-wrap items-center gap-x-3 gap-y-3 border-y border-border py-5 text-[0.6875rem] font-medium uppercase tracking-[0.2em]">
           {spine.map((stage, index) => (
