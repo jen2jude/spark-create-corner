@@ -361,9 +361,9 @@ function StrategistPage() {
                                 {DIMENSION_LABELS[key]}
                               </span>
                               {dimension ? (
-                                <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-accent" />
+                                <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-accent sm:order-3" />
                               ) : null}
-                              <span className="col-start-2 min-w-0 text-sm leading-relaxed text-foreground sm:flex-1">
+                              <span className="col-start-2 min-w-0 text-sm leading-relaxed text-foreground sm:order-2 sm:flex-1">
                                 {dimension ? dimension.summary : "Pending"}
                               </span>
                             </button>
