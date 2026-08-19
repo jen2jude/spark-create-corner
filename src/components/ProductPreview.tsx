@@ -1,4 +1,7 @@
-import { Sparkles, Users, Megaphone, MousePointerClick, BarChart3, ShieldCheck, Repeat2 } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { Sparkles, Users, Megaphone, MousePointerClick, BarChart3, ShieldCheck, Repeat2, RefreshCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const statusItems = [
@@ -11,6 +14,9 @@ const statusItems = [
 ];
 
 export function ProductPreview() {
+  const [step, setStep] = useState<"idle" | "responding">("idle");
+  const revealed = step === "responding";
+
   return (
     <section id="preview" className="relative px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-6xl">
@@ -44,46 +50,69 @@ export function ProductPreview() {
           <div className="grid lg:grid-cols-[1fr_320px]">
             {/* Conversation area */}
             <div className="space-y-6 border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
-              <div className="flex items-start gap-3">
+              <button
+                type="button"
+                onClick={() => setStep("responding")}
+                disabled={revealed}
+                className="group flex w-full items-start gap-3 text-left"
+                aria-label="Preview the campaign response"
+              >
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-foreground text-[10px] font-bold text-primary-foreground">
                   You
                 </div>
-                <div className="rounded-2xl rounded-tl-sm bg-muted px-5 py-3.5">
+                <div className="relative rounded-2xl rounded-tl-sm bg-muted px-5 py-3.5 transition-all group-hover:bg-accent/5 group-hover:ring-1 group-hover:ring-accent/20 group-active:scale-[0.99] disabled:cursor-default disabled:hover:bg-muted disabled:hover:ring-0">
                   <p className="text-sm leading-relaxed text-foreground">
                     I want to get 500 registrations for my upcoming event.
                   </p>
+                  {!revealed && (
+                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-accent">
+                      <Sparkles className="h-3 w-3" aria-hidden />
+                      Click to preview the response
+                    </span>
+                  )}
                 </div>
-              </div>
+              </button>
 
-              <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
-                  <Sparkles className="h-3.5 w-3.5" aria-hidden />
-                </div>
-                <div className="space-y-4">
-                  <div className="rounded-2xl rounded-tl-sm border border-accent/20 bg-accent/5 px-5 py-3.5">
-                    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                      <Sparkles className="h-3.5 w-3.5" aria-hidden />
-                      Oventric
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-foreground">
-                      I'll help you build the campaign.
-                    </p>
+              {revealed && (
+                <div className="flex animate-rise items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                    <Sparkles className="h-3.5 w-3.5" aria-hidden />
                   </div>
+                  <div className="space-y-4">
+                    <div className="rounded-2xl rounded-tl-sm border border-accent/20 bg-accent/5 px-5 py-3.5">
+                      <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                        <Sparkles className="h-3.5 w-3.5" aria-hidden />
+                        Oventric
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-foreground">
+                        I'll help you build the campaign.
+                      </p>
+                    </div>
 
-                  <div className="rounded-2xl border border-border bg-card p-5">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                      Recommended campaign
-                    </p>
-                    <p className="mt-2 text-sm font-medium text-foreground">
-                      Registration campaign targeting your most engaged contacts.
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      Four sends over eleven days, four segments from your 7,840 contacts, and
-                      registrations tracked back to the goal.
-                    </p>
+                    <div className="rounded-2xl border border-border bg-card p-5">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                        Recommended campaign
+                      </p>
+                      <p className="mt-2 text-sm font-medium text-foreground">
+                        Registration campaign targeting your most engaged contacts.
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        Four sends over eleven days, four segments from your 7,840 contacts, and
+                        registrations tracked back to the goal.
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setStep("idle")}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      <RefreshCcw className="h-3 w-3" aria-hidden />
+                      Reset preview
+                    </button>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Status/workspace sidebar */}
@@ -92,8 +121,14 @@ export function ProductPreview() {
                 Campaign status
               </p>
               <dl className="mt-5 grid gap-4">
-                {statusItems.map(({ icon: Icon, label, value }) => (
-                  <div key={label} className="flex items-center justify-between rounded-xl border border-border bg-card p-3.5">
+                {statusItems.map(({ icon: Icon, label, value }, index) => (
+                  <div
+                    key={label}
+                    className={`flex items-center justify-between rounded-xl border border-border p-3.5 transition-all duration-500 ${
+                      revealed ? "bg-card opacity-100" : "bg-muted/50 opacity-40"
+                    }`}
+                    style={{ transitionDelay: revealed ? `${index * 60}ms` : "0ms" }}
+                  >
                     <dt className="flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
                       <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-muted">
                         <Icon className="h-3.5 w-3.5 text-foreground" aria-hidden />
@@ -105,12 +140,16 @@ export function ProductPreview() {
                 ))}
               </dl>
 
-              <Button className="mt-6 w-full rounded-full" size="lg">
+              <Button className="mt-6 w-full rounded-full" size="lg" disabled={!revealed}>
                 Review Campaign
               </Button>
             </div>
           </div>
         </div>
+
+        <p className="mt-5 text-center text-xs text-muted-foreground">
+          This is a guided preview. The full workspace is coming to early-access members.
+        </p>
       </div>
     </section>
   );
