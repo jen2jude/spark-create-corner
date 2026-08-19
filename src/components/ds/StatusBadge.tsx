@@ -21,8 +21,8 @@ export const pillVariants = cva(
 
 export interface PillProps extends VariantProps<typeof pillVariants> {
   children: ReactNode;
-  className?: string;
-  dot?: boolean;
+  className?: string | undefined;
+  dot?: boolean | undefined;
 }
 
 /** Generic labelled badge. Use for tags, counts, small states. */
