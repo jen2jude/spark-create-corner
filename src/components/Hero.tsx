@@ -32,9 +32,8 @@ export function Hero() {
             guided by conversation
           </h1>
           <p className="mt-6 max-w-xl text-base sm:mt-7 sm:text-lg leading-relaxed text-hero-muted">
-            Tell Oventric Mail what you want to achieve. It takes you from strategy and verified
-            audience to design, delivery, deliverability, and measurable results — in one calm
-            workspace.
+            Build, send and optimize marketing campaigns through a simple conversation — from your
+            audience to measurable results.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm text-hero-muted">
