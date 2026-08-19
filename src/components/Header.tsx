@@ -41,10 +41,17 @@ export function Header() {
           </Link>
           <nav className="hidden items-center gap-8 text-sm font-medium text-hero-muted md:flex">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="hover:text-hero-foreground">
+              <a
+                key={link.href}
+                href={isHome ? link.href : `/${link.href}`}
+                className="hover:text-hero-foreground"
+              >
                 {link.label}
               </a>
             ))}
+            <Link to="/strategist" className="hover:text-hero-foreground">
+              Strategist
+            </Link>
           </nav>
           <Button className="hidden rounded-full px-5 sm:inline-flex" asChild>
             <a href="#waitlist">Request early access</a>
