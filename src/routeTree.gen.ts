@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as EarlyAccessRouteImport } from './routes/early-access'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as SignupRouteImport } from './routes/signup'
@@ -41,6 +42,11 @@ const AppRoute = AppRouteImport.update({
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EarlyAccessRoute = EarlyAccessRouteImport.update({
+  id: '/early-access',
+  path: '/early-access',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/design-system': typeof DesignSystemRoute
+  '/early-access': typeof EarlyAccessRoute
   '/login': typeof LoginRoute
   '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/design-system': typeof DesignSystemRoute
+  '/early-access': typeof EarlyAccessRoute
   '/login': typeof LoginRoute
   '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/design-system': typeof DesignSystemRoute
+  '/early-access': typeof EarlyAccessRoute
   '/login': typeof LoginRoute
   '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
@@ -185,6 +194,7 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/design-system'
+    | '/early-access'
     | '/login'
     | '/product'
     | '/signup'
@@ -204,6 +214,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/design-system'
+    | '/early-access'
     | '/login'
     | '/product'
     | '/signup'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/design-system'
+    | '/early-access'
     | '/login'
     | '/product'
     | '/signup'
@@ -245,6 +257,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   DesignSystemRoute: typeof DesignSystemRoute
+  EarlyAccessRoute: typeof EarlyAccessRoute
   LoginRoute: typeof LoginRoute
   ProductRoute: typeof ProductRoute
   SignupRoute: typeof SignupRoute
@@ -273,6 +286,13 @@ declare module '@tanstack/react-router' {
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/early-access': {
+      id: '/early-access'
+      path: '/early-access'
+      fullPath: '/early-access'
+      preLoaderRoute: typeof EarlyAccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -415,6 +435,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   DesignSystemRoute: DesignSystemRoute,
+  EarlyAccessRoute: EarlyAccessRoute,
   LoginRoute: LoginRoute,
   ProductRoute: ProductRoute,
   SignupRoute: SignupRoute,
