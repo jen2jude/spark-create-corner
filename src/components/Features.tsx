@@ -1,11 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MessageSquare, Users, Palette, Shield, BarChart3, RefreshCw } from "lucide-react";
 
 const features = [
   {
     icon: MessageSquare,
     title: "Conversation-driven campaigns",
-    description: "Describe your goal in plain language. Oventric translates it into strategy, audience, messaging, and send plan.",
+    description: "Describe your goal in plain language. Oventric translates it into strategy, audience, messaging, and a send plan you can review.",
   },
   {
     icon: Users,
@@ -15,54 +14,51 @@ const features = [
   {
     icon: Palette,
     title: "Professional email design",
-    description: "Beautiful, brand-consistent emails generated and editable. No HTML or design expertise required.",
+    description: "Brand-consistent emails generated and fully editable. No HTML or design expertise required.",
   },
   {
     icon: Shield,
     title: "Deliverability optimization",
-    description: "AI monitors sender authentication, audience quality, engagement, bounces, and campaign health to optimize delivery.",
+    description: "Sender authentication, audience quality, engagement, bounces, and campaign health monitored continuously.",
   },
   {
     icon: BarChart3,
     title: "Real analytics",
-    description: "Track opens, clicks, registrations, conversions, and revenue. Ask questions about your data and get answers based on real stored results.",
+    description: "Track opens, clicks, registrations, conversions, and revenue. Ask questions about your data and get answers from stored results.",
   },
   {
     icon: RefreshCw,
     title: "Lead nurturing & follow-up",
-    description: "Automated journeys based on opens, clicks, and registrations. Oventric recommends the next best follow-up.",
+    description: "Journeys built on real behaviour, with a recommended next action for every segment.",
   },
 ];
 
 export function Features() {
   return (
-    <section id="features" className="border-t border-border px-6 py-24 lg:px-8 lg:py-32">
+    <section id="features" className="border-t border-border bg-secondary/40 px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <div className="max-w-3xl">
+          <p className="eyebrow">Capabilities</p>
+          <h2 className="mt-5 font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Everything you need to turn contacts into customers
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            A complete marketing campaign workspace with AI operating across the entire journey.
+          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+            A complete marketing workspace, with intelligence working quietly across the entire journey.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid border-t border-border sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
-            <Card
+            <div
               key={feature.title}
-              className="border-border bg-card transition-all hover:border-accent/30 hover:shadow-sm"
+              className="group border-b border-border px-0 py-8 transition-colors duration-300 sm:px-8 sm:[&:nth-child(2n+1)]:pl-0 lg:[&:nth-child(3n+1)]:pl-0 sm:border-r sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
             >
-              <CardHeader className="pb-3">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
-                  <feature.icon className="h-5 w-5 text-accent" />
-                </div>
-                <CardTitle className="font-serif text-lg font-semibold">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
-              </CardContent>
-            </Card>
+              <feature.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
+              <h3 className="mt-5 font-serif text-lg font-semibold text-foreground">{feature.title}</h3>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                {feature.description}
+              </p>
+            </div>
           ))}
         </div>
       </div>
