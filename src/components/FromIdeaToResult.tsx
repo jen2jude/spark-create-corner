@@ -10,6 +10,19 @@ const steps = [
   "Results analyzed",
 ];
 
+const spine = [
+  "Audience",
+  "Intelligence",
+  "Strategy",
+  "Campaign",
+  "Delivery",
+  "Engagement",
+  "Conversion",
+  "Lead",
+  "Nurture",
+  "Revenue",
+];
+
 export function FromIdeaToResult() {
   return (
     <section id="workflow" className="px-6 py-24 lg:px-8 lg:py-32">
@@ -22,6 +35,22 @@ export function FromIdeaToResult() {
             Oventric doesn't just send emails. It guides the entire journey from a business goal to measurable outcomes.
           </p>
         </div>
+
+        <ol className="mx-auto mt-12 flex max-w-5xl flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-medium uppercase tracking-[0.18em]">
+          {spine.map((stage, index) => (
+            <li key={stage} className="flex items-center gap-3">
+              <span className={index === spine.length - 1 ? "text-accent" : "text-muted-foreground"}>
+                {stage}
+              </span>
+              {index < spine.length - 1 && (
+                <span className="text-border" aria-hidden>
+                  →
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+
 
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step, index) => (
