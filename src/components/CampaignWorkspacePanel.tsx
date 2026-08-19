@@ -156,7 +156,7 @@ function Metric({
         <Icon className="h-3.5 w-3.5" />
         {label}
       </p>
-      <p className="mt-2 font-serif text-lg leading-snug text-foreground">{value}</p>
+      <p className="mt-2 break-words font-serif text-lg leading-snug text-foreground">{value}</p>
       {note ? <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{note}</p> : null}
     </div>
   );
