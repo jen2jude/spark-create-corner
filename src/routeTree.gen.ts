@@ -14,6 +14,7 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as DeliverabilityRouteImport } from './routes/deliverability'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as EarlyAccessRouteImport } from './routes/early-access'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProductRouteImport } from './routes/product'
@@ -54,6 +55,11 @@ const DesignSystemRoute = DesignSystemRouteImport.update({
 const EarlyAccessRoute = EarlyAccessRouteImport.update({
   id: '/early-access',
   path: '/early-access',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
   '/early-access': typeof EarlyAccessRoute
+  '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/product': typeof ProductRoute
@@ -165,6 +172,7 @@ export interface FileRoutesByTo {
   '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
   '/early-access': typeof EarlyAccessRoute
+  '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/product': typeof ProductRoute
@@ -189,6 +197,7 @@ export interface FileRoutesById {
   '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
   '/early-access': typeof EarlyAccessRoute
+  '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/product': typeof ProductRoute
@@ -214,6 +223,7 @@ export interface FileRouteTypes {
     | '/deliverability'
     | '/design-system'
     | '/early-access'
+    | '/faq'
     | '/how-it-works'
     | '/login'
     | '/product'
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/deliverability'
     | '/design-system'
     | '/early-access'
+    | '/faq'
     | '/how-it-works'
     | '/login'
     | '/product'
@@ -259,6 +270,7 @@ export interface FileRouteTypes {
     | '/deliverability'
     | '/design-system'
     | '/early-access'
+    | '/faq'
     | '/how-it-works'
     | '/login'
     | '/product'
@@ -283,6 +295,7 @@ export interface RootRouteChildren {
   DeliverabilityRoute: typeof DeliverabilityRoute
   DesignSystemRoute: typeof DesignSystemRoute
   EarlyAccessRoute: typeof EarlyAccessRoute
+  FaqRoute: typeof FaqRoute
   HowItWorksRoute: typeof HowItWorksRoute
   LoginRoute: typeof LoginRoute
   ProductRoute: typeof ProductRoute
@@ -326,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/early-access'
       fullPath: '/early-access'
       preLoaderRoute: typeof EarlyAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-it-works': {
@@ -477,6 +497,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeliverabilityRoute: DeliverabilityRoute,
   DesignSystemRoute: DesignSystemRoute,
   EarlyAccessRoute: EarlyAccessRoute,
+  FaqRoute: FaqRoute,
   HowItWorksRoute: HowItWorksRoute,
   LoginRoute: LoginRoute,
   ProductRoute: ProductRoute,
