@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export type NavItem = {
   label: string;
-  to: LinkProps["to"];
+  to: NonNullable<LinkProps["to"]>;
   icon?: ReactNode | undefined;
 };
 
