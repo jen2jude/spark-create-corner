@@ -50,7 +50,7 @@ export function Header() {
               </a>
             ))}
             <Link to="/strategist" className="hover:text-hero-foreground">
-              Strategist
+              Workspace
             </Link>
           </nav>
           <Button className="hidden rounded-full px-5 sm:inline-flex" asChild>

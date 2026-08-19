@@ -15,10 +15,34 @@ export type PlanKey = (typeof PLAN_KEYS)[number];
 
 export type PlanDimension = { key: PlanKey; summary: string; detail: string };
 
+export type CampaignEmail = {
+  step: string;
+  sender: string;
+  subject: string;
+  preheader: string;
+  body: string[];
+  ctaLabel: string;
+  signoff: string;
+};
+
+export type CampaignWorkspace = {
+  campaignName: string;
+  audienceSize: string;
+  audienceNote: string;
+  cta: string;
+  tracking: string;
+  deliverability: string;
+  deliverabilityNote: string;
+  sendWindow: string;
+  emails: CampaignEmail[];
+  changed: string[];
+};
+
 export type CampaignPlan = {
   reading: string;
   reply: string;
   dimensions: PlanDimension[];
+  workspace: CampaignWorkspace;
 };
 
 export type StrategistTurn = { role: "user" | "assistant"; content: string };
@@ -39,12 +63,36 @@ Rules:
 - "reading" is one short paragraph: how you interpreted the objective and what kind of problem it really is.
 - "reply" is one or two sentences to the user: what you assumed, or the single most useful question to sharpen the plan.
 - "summary" is one line (max ~90 characters). "detail" is 2-3 sentences of reasoning.
-- When the user refines, revise the existing plan rather than starting over, and keep unaffected dimensions stable.`;
+- When the user refines, revise the existing plan rather than starting over, and keep unaffected dimensions stable.
+
+You also build the CAMPAIGN WORKSPACE the operator sees next to the conversation: the actual emails plus the live campaign state.
+- "emails" are the real drafts, in send order (2 to 4 of them). "step" names the send and its timing ("Email 1 · 21 days out"). "body" is 2 to 4 short paragraphs of finished copy, no placeholders like [Name] unless it is a real merge field, no markdown.
+- "sender" is a plausible from-line ("Events team <events@yourdomain.com>"). "subject" is under 60 characters, "preheader" under 90.
+- "audienceSize" is a number with thousands separators ("7,840"); "audienceNote" says how it was derived or filtered.
+- "tracking" and "deliverability" are short states an operator reads at a glance ("Enabled · opens, clicks, registrations", "Healthy"). "deliverabilityNote" explains why.
+- "sendWindow" is the overall window ("21 days, 4 sends, ending 12 Sep").
+- "changed" lists what you changed in THIS turn, as short phrases ("Tone: more professional", "Intro shortened"). On the first turn list what you created. Keep it to 1-4 items.
+- When the user asks for a copy change ("make the email more professional"), rewrite the affected emails and say plainly in "reply" what you adjusted.`;
+
+const emailSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: ["step", "sender", "subject", "preheader", "body", "ctaLabel", "signoff"],
+  properties: {
+    step: { type: "string" },
+    sender: { type: "string" },
+    subject: { type: "string" },
+    preheader: { type: "string" },
+    body: { type: "array", items: { type: "string" } },
+    ctaLabel: { type: "string" },
+    signoff: { type: "string" },
+  },
+} as const;
 
 const schema = {
   type: "object",
   additionalProperties: false,
-  required: ["reading", "reply", "dimensions"],
+  required: ["reading", "reply", "dimensions", "workspace"],
   properties: {
     reading: { type: "string" },
     reply: { type: "string" },
@@ -59,6 +107,34 @@ const schema = {
           summary: { type: "string" },
           detail: { type: "string" },
         },
+      },
+    },
+    workspace: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "campaignName",
+        "audienceSize",
+        "audienceNote",
+        "cta",
+        "tracking",
+        "deliverability",
+        "deliverabilityNote",
+        "sendWindow",
+        "emails",
+        "changed",
+      ],
+      properties: {
+        campaignName: { type: "string" },
+        audienceSize: { type: "string" },
+        audienceNote: { type: "string" },
+        cta: { type: "string" },
+        tracking: { type: "string" },
+        deliverability: { type: "string" },
+        deliverabilityNote: { type: "string" },
+        sendWindow: { type: "string" },
+        emails: { type: "array", items: emailSchema },
+        changed: { type: "array", items: { type: "string" } },
       },
     },
   },
@@ -162,9 +238,32 @@ export async function generateCampaignPlan(input: {
     (key) => byKey.get(key) ?? { key, summary: "Not decided yet", detail: "" },
   );
 
+  const w = parsed.workspace;
+  const workspace: CampaignWorkspace = {
+    campaignName: w?.campaignName ?? "Untitled campaign",
+    audienceSize: w?.audienceSize ?? "—",
+    audienceNote: w?.audienceNote ?? "",
+    cta: w?.cta ?? "—",
+    tracking: w?.tracking ?? "Enabled",
+    deliverability: w?.deliverability ?? "Healthy",
+    deliverabilityNote: w?.deliverabilityNote ?? "",
+    sendWindow: w?.sendWindow ?? "—",
+    emails: (w?.emails ?? []).map((e) => ({
+      step: e.step ?? "",
+      sender: e.sender ?? "",
+      subject: e.subject ?? "",
+      preheader: e.preheader ?? "",
+      body: e.body ?? [],
+      ctaLabel: e.ctaLabel ?? "",
+      signoff: e.signoff ?? "",
+    })),
+    changed: w?.changed ?? [],
+  };
+
   return {
     reading: parsed.reading ?? "",
     reply: parsed.reply ?? "",
     dimensions,
+    workspace,
   };
 }
