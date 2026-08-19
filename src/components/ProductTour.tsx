@@ -38,7 +38,7 @@ const tabs = [
 
 export function ProductTour() {
   const [active, setActive] = useState(0);
-  const tab = tabs[active];
+  const tab = tabs[active] ?? tabs[0];
 
   return (
     <section id="product" className="border-t border-border bg-secondary/50 px-6 py-24 lg:px-8 lg:py-32">
