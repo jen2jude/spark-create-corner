@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { BarChart3, Users } from "lucide-react";
 import { Header } from "@/components/Header";
+import { Logo } from "@/components/Logo";
 import { Footer } from "@/components/Footer";
 import {
   AiMessage,
@@ -512,7 +513,77 @@ function DesignSystemPage() {
             />
           </div>
         </Section>
+
+        <Section tone="alt" aria-labelledby="foundation">
+          <Text variant="eyebrow">Foundation</Text>
+          <Text as="h2" variant="title" id="foundation" className="mt-2">
+            Identity, logo, navigation, motion and responsive rules
+          </Text>
+          <Text variant="muted" className="mt-3 max-w-prose">
+            These rules govern every screen built on the system. They are settled — new
+            surfaces follow them rather than reinterpreting them.
+          </Text>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <Panel>
+              <Text variant="subheading">Visual identity</Text>
+              <Text variant="muted" className="mt-2">
+                Calm, editorial, light. Off-white page, white cards, charcoal type, hairline
+                borders, one ochre accent. No neon, glassmorphism or purple AI styling.
+              </Text>
+            </Panel>
+
+            <Panel>
+              <Text variant="subheading">Logo usage</Text>
+              <Text variant="muted" className="mt-2">
+                Mark left, OVENTRIC in foreground, MAIL in the brand gradient. The gradient
+                appears only in the logo. Animated mark on the homepage; static everywhere else.
+              </Text>
+              <div className="mt-4 flex flex-col gap-3">
+                <Logo />
+                <Logo animated animate={false} idSuffix="ds-static" />
+              </div>
+            </Panel>
+
+            <Panel>
+              <Text variant="subheading">Navigation principles</Text>
+              <Text variant="muted" className="mt-2">
+                One source of truth for app navigation, grouped by the revenue chain: Create,
+                Audience, Results, Account. Sidebar on desktop, sheet on mobile, skip link
+                first in the tab order, 44px targets.
+              </Text>
+            </Panel>
+
+            <Panel>
+              <Text variant="subheading">Animation concept</Text>
+              <Text variant="muted" className="mt-2">
+                Motion carries meaning only: progress growing, state rising into place, tab
+                cross-fades, gentle hover lift. The logo is the single expressive animation and
+                plays once per page load. All motion respects reduced-motion.
+              </Text>
+            </Panel>
+
+            <Panel>
+              <Text variant="subheading">Responsive behaviour</Text>
+              <Text variant="muted" className="mt-2">
+                Layouts are rebuilt per breakpoint, not shrunk. Text containers use min-w-0 with
+                truncation, fixed widgets shrink-0, and split workspaces collapse to a single
+                focused view on mobile.
+              </Text>
+            </Panel>
+
+            <Panel>
+              <Text variant="subheading">Component architecture</Text>
+              <Text variant="muted" className="mt-2">
+                Product code imports from <code>@/components/ds</code> only — tokens, typography,
+                panels, fields, status, AI messages, workflow, tables, notices, charts, email
+                preview and navigation. shadcn primitives are re-exported, never forked.
+              </Text>
+            </Panel>
+          </div>
+        </Section>
       </main>
+
 
       <Footer />
     </div>
