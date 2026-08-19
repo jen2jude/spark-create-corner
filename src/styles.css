@@ -100,6 +100,7 @@
   --hero-foreground: oklch(0.18 0.01 60);
   --hero-muted: oklch(0.45 0.02 70);
   --shadow-lift: 0 24px 60px -28px oklch(0.3 0.05 70 / 0.35);
+  --shadow-soft: 0 1px 2px oklch(0.3 0.02 70 / 0.04), 0 8px 24px -16px oklch(0.3 0.02 70 / 0.12);
   --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -174,6 +175,24 @@
 
 @utility shadow-lift {
   box-shadow: var(--shadow-lift);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+/* Editorial section eyebrow. */
+@utility eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+@utility hairline {
+  border-top: 1px solid var(--color-border);
 }
 
 @keyframes rise-in {

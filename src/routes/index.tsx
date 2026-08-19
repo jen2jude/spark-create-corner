@@ -5,6 +5,7 @@ import { ProductPreview } from "@/components/ProductPreview";
 import { FromIdeaToResult } from "@/components/FromIdeaToResult";
 import { Features } from "@/components/Features";
 import { AudienceSegments } from "@/components/AudienceSegments";
+import { TrustBand } from "@/components/TrustBand";
 import { WaitlistSection } from "@/components/WaitlistSection";
 import { StickyContact } from "@/components/StickyContact";
 import { Footer } from "@/components/Footer";
@@ -30,6 +31,7 @@ function Index() {
       <main>
         <Hero />
         <ProductPreview />
+        <TrustBand />
         <FromIdeaToResult />
         <Features />
         <AudienceSegments />
