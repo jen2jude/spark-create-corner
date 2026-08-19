@@ -32,6 +32,7 @@ function Index() {
   return (
     <MarketingShell>
       <Hero />
+      <PositioningBar />
       <ProductPreview />
       <TrustBand />
       <FromIdeaToResult />
