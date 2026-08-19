@@ -36,7 +36,13 @@ export function Pill({ tone, dot, className, children }: PillProps) {
 }
 
 /** Campaign lifecycle badge — always reads as text, never colour alone. */
-export function StatusBadge({ status, className }: { status: CampaignStatus; className?: string }) {
+export function StatusBadge({
+  status,
+  className,
+}: {
+  status: CampaignStatus;
+  className?: string | undefined;
+}) {
   const { label, tone } = campaignStatus[status];
   return (
     <Pill tone={tone} dot className={className}>
