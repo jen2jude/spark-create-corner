@@ -350,22 +350,22 @@ function StrategistPage() {
                               disabled={!dimension}
                               onClick={() => setOpen(isOpen ? null : key)}
                               aria-expanded={isOpen}
-                              className={`flex w-full items-baseline gap-4 py-4 text-left transition-opacity duration-500 ${
+                              className={`grid w-full grid-cols-[1.5rem_minmax(0,1fr)_auto] items-baseline gap-x-3 gap-y-1 py-4 text-left transition-opacity duration-500 sm:flex sm:gap-4 ${
                                 dimension ? "opacity-100" : "opacity-30"
                               }`}
                             >
                               <span className="w-6 shrink-0 font-serif text-sm text-muted-foreground">
                                 {String(i + 1).padStart(2, "0")}
                               </span>
-                              <span className="w-[9.5rem] shrink-0 text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                              <span className="min-w-0 text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted-foreground sm:w-[9.5rem] sm:shrink-0">
                                 {DIMENSION_LABELS[key]}
-                              </span>
-                              <span className="flex-1 text-sm leading-relaxed text-foreground">
-                                {dimension ? dimension.summary : "Pending"}
                               </span>
                               {dimension ? (
                                 <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-accent" />
                               ) : null}
+                              <span className="col-start-2 min-w-0 text-sm leading-relaxed text-foreground sm:flex-1">
+                                {dimension ? dimension.summary : "Pending"}
+                              </span>
                             </button>
                             {isOpen && dimension?.detail ? (
                               <p className="animate-fade-in pb-5 pl-[2rem] text-sm leading-relaxed text-muted-foreground sm:pl-[12.5rem]">
