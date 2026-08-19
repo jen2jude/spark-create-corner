@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 interface AnimatedMarkProps {
   className?: string;
   /** Unique id suffix so multiple marks can coexist without gradient id clashes. */
-  idSuffix?: string;
+  idSuffix?: string | undefined;
 }
 
 /**
