@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -140,9 +140,9 @@ export function HeroSignup() {
 
         <p className="text-xs leading-relaxed text-muted-foreground">
           No spam, no card required. Want to shape the product?{" "}
-          <a href="#waitlist" className="text-accent underline-offset-4 hover:underline">
+          <Link to="/early-access" className="text-accent underline-offset-4 hover:underline">
             Answer a few questions
-          </a>
+          </Link>
           .
         </p>
       </form>

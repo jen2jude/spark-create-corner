@@ -11,8 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as DeliverabilityRouteImport } from './routes/deliverability'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as EarlyAccessRouteImport } from './routes/early-access'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProductRouteImport } from './routes/product'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StrategistRouteImport } from './routes/strategist'
 import { Route as ThanksRouteImport } from './routes/thanks'
@@ -37,14 +42,39 @@ const AppRoute = AppRouteImport.update({
   path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeliverabilityRoute = DeliverabilityRouteImport.update({
+  id: '/deliverability',
+  path: '/deliverability',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EarlyAccessRoute = EarlyAccessRouteImport.update({
+  id: '/early-access',
+  path: '/early-access',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductRoute = ProductRouteImport.update({
+  id: '/product',
+  path: '/product',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -116,8 +146,13 @@ const AppWorkspaceRoute = AppWorkspaceRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
+  '/early-access': typeof EarlyAccessRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
+  '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
@@ -134,8 +169,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
+  '/early-access': typeof EarlyAccessRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
+  '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
@@ -154,8 +194,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
+  '/early-access': typeof EarlyAccessRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
+  '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
@@ -175,8 +220,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/app'
+    | '/deliverability'
     | '/design-system'
+    | '/early-access'
+    | '/faq'
+    | '/how-it-works'
     | '/login'
+    | '/product'
     | '/signup'
     | '/strategist'
     | '/thanks'
@@ -193,8 +243,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/deliverability'
     | '/design-system'
+    | '/early-access'
+    | '/faq'
+    | '/how-it-works'
     | '/login'
+    | '/product'
     | '/signup'
     | '/strategist'
     | '/thanks'
@@ -212,8 +267,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/app'
+    | '/deliverability'
     | '/design-system'
+    | '/early-access'
+    | '/faq'
+    | '/how-it-works'
     | '/login'
+    | '/product'
     | '/signup'
     | '/strategist'
     | '/thanks'
@@ -232,8 +292,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  DeliverabilityRoute: typeof DeliverabilityRoute
   DesignSystemRoute: typeof DesignSystemRoute
+  EarlyAccessRoute: typeof EarlyAccessRoute
+  FaqRoute: typeof FaqRoute
+  HowItWorksRoute: typeof HowItWorksRoute
   LoginRoute: typeof LoginRoute
+  ProductRoute: typeof ProductRoute
   SignupRoute: typeof SignupRoute
   StrategistRoute: typeof StrategistRoute
   ThanksRoute: typeof ThanksRoute
@@ -255,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/deliverability': {
+      id: '/deliverability'
+      path: '/deliverability'
+      fullPath: '/deliverability'
+      preLoaderRoute: typeof DeliverabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/design-system': {
       id: '/design-system'
       path: '/design-system'
@@ -262,11 +334,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DesignSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/early-access': {
+      id: '/early-access'
+      path: '/early-access'
+      fullPath: '/early-access'
+      preLoaderRoute: typeof EarlyAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product': {
+      id: '/product'
+      path: '/product'
+      fullPath: '/product'
+      preLoaderRoute: typeof ProductRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -394,8 +494,13 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  DeliverabilityRoute: DeliverabilityRoute,
   DesignSystemRoute: DesignSystemRoute,
+  EarlyAccessRoute: EarlyAccessRoute,
+  FaqRoute: FaqRoute,
+  HowItWorksRoute: HowItWorksRoute,
   LoginRoute: LoginRoute,
+  ProductRoute: ProductRoute,
   SignupRoute: SignupRoute,
   StrategistRoute: StrategistRoute,
   ThanksRoute: ThanksRoute,

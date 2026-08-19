@@ -6,12 +6,11 @@ import { Logo } from "@/components/Logo";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 const navLinks = [
-  { href: "#product", label: "Product" },
-  { href: "#workflow", label: "How it works" },
-  { href: "#features", label: "Features" },
-  { href: "#audience", label: "For you" },
-  { href: "#faq", label: "FAQ" },
-];
+  { to: "/product", label: "Product" },
+  { to: "/how-it-works", label: "How it works" },
+  { to: "/deliverability", label: "Deliverability" },
+  { to: "/faq", label: "FAQ" },
+] as const;
 
 export function Header() {
   const location = useLocation();
@@ -27,8 +26,8 @@ export function Header() {
           </span>
 
           <div className="flex items-center gap-6">
-            <a href="#waitlist" className="hover:text-foreground">Early access</a>
-            <a href="#waitlist" className="font-medium text-accent hover:opacity-80">Sign in</a>
+            <Link to="/early-access" className="hover:text-foreground">Early access</Link>
+            <Link to="/login" className="font-medium text-accent hover:opacity-80">Sign in</Link>
           </div>
         </div>
       </div>
@@ -46,13 +45,14 @@ export function Header() {
 
           <nav aria-label="Main" className="hidden min-w-0 items-center gap-5 text-sm font-medium text-hero-muted md:flex lg:gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={isHome ? link.href : `/${link.href}`}
+              <Link
+                key={link.to}
+                to={link.to}
+                activeProps={{ className: "text-hero-foreground" }}
                 className="hover:text-hero-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <Link to="/strategist" className="hover:text-hero-foreground">
               Workspace
@@ -61,7 +61,7 @@ export function Header() {
 
           <div className="flex shrink-0 items-center gap-2">
             <Button className="hidden rounded-full px-5 lg:inline-flex" asChild>
-              <a href="#waitlist">Request early access</a>
+              <Link to="/early-access">Request early access</Link>
             </Button>
 
             <Sheet open={open} onOpenChange={setOpen}>
@@ -86,20 +86,20 @@ export function Header() {
                     Workspace
                   </Link>
                   {navLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={isHome ? link.href : `/${link.href}`}
+                    <Link
+                      key={link.to}
+                      to={link.to}
                       onClick={() => setOpen(false)}
                       className="border-b border-border py-3 text-muted-foreground"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   ))}
                 </nav>
                 <Button className="mt-8 w-full rounded-full" asChild>
-                  <a href="#waitlist" onClick={() => setOpen(false)}>
+                  <Link to="/early-access" onClick={() => setOpen(false)}>
                     Request early access
-                  </a>
+                  </Link>
                 </Button>
               </SheetContent>
             </Sheet>
