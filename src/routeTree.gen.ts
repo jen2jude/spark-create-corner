@@ -21,6 +21,7 @@ import { Route as ProductRouteImport } from './routes/product'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StrategistRouteImport } from './routes/strategist'
 import { Route as ThanksRouteImport } from './routes/thanks'
+import { Route as WhoItsForRouteImport } from './routes/who-its-for'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
 import { Route as AppAudienceRouteImport } from './routes/app.audience'
@@ -92,6 +93,11 @@ const ThanksRoute = ThanksRouteImport.update({
   path: '/thanks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WhoItsForRoute = WhoItsForRouteImport.update({
+  id: '/who-its-for',
+  path: '/who-its-for',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
+  '/who-its-for': typeof WhoItsForRoute
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/audience': typeof AppAudienceRoute
   '/app/automations': typeof AppAutomationsRoute
@@ -179,6 +186,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
+  '/who-its-for': typeof WhoItsForRoute
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/audience': typeof AppAudienceRoute
   '/app/automations': typeof AppAutomationsRoute
@@ -204,6 +212,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
+  '/who-its-for': typeof WhoItsForRoute
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/audience': typeof AppAudienceRoute
   '/app/automations': typeof AppAutomationsRoute
@@ -230,6 +239,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/strategist'
     | '/thanks'
+    | '/who-its-for'
     | '/app/analytics'
     | '/app/audience'
     | '/app/automations'
@@ -253,6 +263,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/strategist'
     | '/thanks'
+    | '/who-its-for'
     | '/app/analytics'
     | '/app/audience'
     | '/app/automations'
@@ -277,6 +288,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/strategist'
     | '/thanks'
+    | '/who-its-for'
     | '/app/analytics'
     | '/app/audience'
     | '/app/automations'
@@ -302,6 +314,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   StrategistRoute: typeof StrategistRoute
   ThanksRoute: typeof ThanksRoute
+  WhoItsForRoute: typeof WhoItsForRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -388,6 +401,13 @@ declare module '@tanstack/react-router' {
       path: '/thanks'
       fullPath: '/thanks'
       preLoaderRoute: typeof ThanksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/who-its-for': {
+      id: '/who-its-for'
+      path: '/who-its-for'
+      fullPath: '/who-its-for'
+      preLoaderRoute: typeof WhoItsForRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/': {
@@ -504,6 +524,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   StrategistRoute: StrategistRoute,
   ThanksRoute: ThanksRoute,
+  WhoItsForRoute: WhoItsForRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
