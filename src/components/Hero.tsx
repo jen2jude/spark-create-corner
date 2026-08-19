@@ -27,15 +27,15 @@ export function Hero() {
             Early access
           </p>
           <h1 className="mt-5 font-sans text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-hero-foreground sm:mt-6 sm:text-6xl lg:text-7xl">
-            Tell Oventric what you
+            Marketing campaigns,
             <br />
-            want to achieve
+            guided by conversation
           </h1>
           <p className="mt-6 max-w-xl text-base sm:mt-7 sm:text-lg leading-relaxed text-hero-muted">
-            We&rsquo;ll help you build the campaign. From audience to outcome, Oventric Mail brings
-            strategy, creation, delivery, tracking and follow-up into one intelligent workspace.
+            Tell Oventric Mail what you want to achieve. It takes you from strategy and verified
+            audience to design, delivery, deliverability, and measurable results — in one calm
+            workspace.
           </p>
-
 
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm text-hero-muted">
             {proofPoints.map(({ icon: Icon, label }) => (
