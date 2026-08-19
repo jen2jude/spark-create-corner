@@ -441,3 +441,69 @@ export function DeliveryScreen() {
     </AppChrome>
   );
 }
+
+/**
+ * Controls / settings surface.
+ *
+ * "Simple by default. Powerful when needed." Every control group below is a
+ * planned capability with real defaults; nothing is removed from the product,
+ * it is only kept out of the way until a professional user opens it.
+ */
+const controlGroups = [
+  { name: "Campaign settings", state: "Objective, cadence, send window, goal metric" },
+  { name: "Sender configuration", state: "hello@yourbrand.com · reply-to · footer address" },
+  { name: "Authentication", state: "SPF, DKIM, DMARC · alignment strict" },
+  { name: "Audience rules", state: "12 conditions · engagement scoring · suppression" },
+  { name: "Tracking", state: "Opens, clicks, UTM template, conversion events" },
+  { name: "Automation", state: "4 triggers · re-permission and nurture sequences" },
+  { name: "Sending settings", state: "Rate limit 4,000/hr · warm-up curve · retries" },
+  { name: "Analytics", state: "Attribution window 14 days · custom reports" },
+  { name: "Integrations", state: "CRM, CSV, webhooks, events API" },
+  { name: "Data", state: "Retention, export, deletion, regional storage" },
+] as const;
+
+export function ControlsScreen() {
+  return (
+    <AppChrome
+      active="Campaigns"
+      title="Everything is still yours to change"
+      subtitle="Defaults chosen for you, overrides one click away"
+    >
+      <div className="grid gap-3 lg:grid-cols-[1.35fr_1fr]">
+        <div className="rounded-lg border border-border/70 bg-background">
+          <div className="flex items-center justify-between border-b border-border/60 px-3.5 py-2">
+            <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              Controls
+            </p>
+            <span className="text-[10px] text-muted-foreground">Defaults applied · 10 areas</span>
+          </div>
+          <ul className="divide-y divide-border/60">
+            {controlGroups.map((group) => (
+              <li key={group.name} className="flex items-start justify-between gap-3 px-3.5 py-2">
+                <div className="min-w-0">
+                  <p className="text-xs font-medium text-foreground">{group.name}</p>
+                  <p className="mt-0.5 truncate text-[11px] text-muted-foreground">{group.state}</p>
+                </div>
+                <span className="mt-0.5 shrink-0 text-[10px] font-medium text-accent">Open</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <div className="rounded-lg border border-border/70 bg-background p-3">
+            <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              Overrides in this campaign
+            </p>
+            <p className="mt-1.5 font-serif text-xl leading-none text-foreground">3</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+              Send window, rate limit and attribution window set manually. The rest follow the
+              recommended defaults and can be changed at any point.
+            </p>
+          </div>
+          <Recommendation text="You raised the hourly rate limit above the warm-up curve for this domain. I can keep your setting, or pace the first 5,000 sends to protect the inbox rate." />
+        </div>
+      </div>
+    </AppChrome>
+  );
+}
