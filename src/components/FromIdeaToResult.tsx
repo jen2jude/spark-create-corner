@@ -74,9 +74,9 @@ export function FromIdeaToResult() {
         <div className="mt-16 grid gap-x-12 gap-y-14 lg:grid-cols-3">
           {phases.map((phase) => (
             <div key={phase.label}>
-              <div className="flex items-baseline justify-between border-b border-foreground/15 pb-4">
+              <div className="border-b border-foreground/15 pb-4">
                 <h3 className="font-serif text-xl font-semibold text-foreground">{phase.label}</h3>
-                <p className="text-[0.6875rem] uppercase tracking-[0.16em] text-muted-foreground">
+                <p className="mt-2 text-[0.6875rem] uppercase tracking-[0.16em] text-muted-foreground">
                   {phase.stages}
                 </p>
               </div>
