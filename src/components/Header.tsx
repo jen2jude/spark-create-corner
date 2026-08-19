@@ -26,9 +26,8 @@ export function Header() {
             Oventric <span className="hidden sm:inline text-muted-foreground/70">· ecosystem</span>
           </span>
 
-          <div className="flex items-center gap-6">
-            <Link to="/login" className="font-medium text-accent hover:opacity-80">Sign in</Link>
-          </div>
+          <div className="flex items-center gap-6" />
+
         </div>
       </div>
 
