@@ -115,8 +115,14 @@ function StrategistPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-primary-foreground"
+      >
+        Skip to main content
+      </a>
       <Header />
-      <main className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
+      <main id="main" className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-3xl">
@@ -169,6 +175,10 @@ function StrategistPage() {
                 <div className="rounded-2xl border border-border bg-card shadow-soft">
                   <div
                     ref={threadRef}
+                    role="log"
+                    aria-live="polite"
+                    aria-label="Conversation with the strategist"
+                    tabIndex={0}
                     className={`space-y-5 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 ${
                       view === "conversation" ? "max-h-[60vh] sm:max-h-[32rem]" : "max-h-[22rem]"
                     }`}
