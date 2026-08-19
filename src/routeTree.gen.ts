@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as DeliverabilityRouteImport } from './routes/deliverability'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as EarlyAccessRouteImport } from './routes/early-access'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
@@ -38,6 +39,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeliverabilityRoute = DeliverabilityRouteImport.update({
+  id: '/deliverability',
+  path: '/deliverability',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
@@ -134,6 +140,7 @@ const AppWorkspaceRoute = AppWorkspaceRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
   '/early-access': typeof EarlyAccessRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -155,6 +162,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
   '/early-access': typeof EarlyAccessRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -178,6 +186,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/deliverability': typeof DeliverabilityRoute
   '/design-system': typeof DesignSystemRoute
   '/early-access': typeof EarlyAccessRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/app'
+    | '/deliverability'
     | '/design-system'
     | '/early-access'
     | '/how-it-works'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/deliverability'
     | '/design-system'
     | '/early-access'
     | '/how-it-works'
@@ -245,6 +256,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/app'
+    | '/deliverability'
     | '/design-system'
     | '/early-access'
     | '/how-it-works'
@@ -268,6 +280,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  DeliverabilityRoute: typeof DeliverabilityRoute
   DesignSystemRoute: typeof DesignSystemRoute
   EarlyAccessRoute: typeof EarlyAccessRoute
   HowItWorksRoute: typeof HowItWorksRoute
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deliverability': {
+      id: '/deliverability'
+      path: '/deliverability'
+      fullPath: '/deliverability'
+      preLoaderRoute: typeof DeliverabilityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/design-system': {
@@ -454,6 +474,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  DeliverabilityRoute: DeliverabilityRoute,
   DesignSystemRoute: DesignSystemRoute,
   EarlyAccessRoute: EarlyAccessRoute,
   HowItWorksRoute: HowItWorksRoute,
