@@ -1,21 +1,28 @@
 import mark from "@/assets/oventric-mark.png.asset.json";
+import { AnimatedMark } from "@/components/AnimatedMark";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
   className?: string;
   size?: "sm" | "lg";
+  /** Animate the RGB O into an envelope and back. Use selectively. */
+  animated?: boolean;
+  /** Unique suffix when more than one animated mark is on the page. */
+  idSuffix?: string;
 }
 
-export function Logo({ className, size = "sm" }: LogoProps) {
+export function Logo({ className, size = "sm", animated = false, idSuffix }: LogoProps) {
   const isLarge = size === "lg";
+  const markClass = cn("shrink-0 object-contain", isLarge ? "h-14 w-14" : "h-9 w-9");
 
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
-      <img
-        src={mark.url}
-        alt="Oventric Mail logo"
-        className={cn("shrink-0 object-contain", isLarge ? "h-14 w-14" : "h-9 w-9")}
-      />
+      {animated ? (
+        <AnimatedMark className={markClass} idSuffix={idSuffix} />
+      ) : (
+        <img src={mark.url} alt="Oventric Mail logo" className={markClass} />
+      )}
+
       <span
         className={cn(
           "font-sans font-medium uppercase leading-none",
