@@ -1,3 +1,4 @@
+import { SectionHeader } from "@/components/SectionHeader";
 /**
  * Deliverability positioning.
  *
@@ -46,17 +47,11 @@ export function Deliverability() {
       className="border-t border-border bg-muted/30 px-6 py-24 lg:px-8 lg:py-32"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="eyebrow">Deliverability</p>
-          <h2 className="mt-5 font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Built for better deliverability
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            AI-powered deliverability optimization works on the things that are genuinely in your
-            control — who you send to, how you send, and how you respond to what comes back. No
-            platform can promise a mailbox provider's decision, and we won't pretend otherwise.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Deliverability"
+          title="Built for better deliverability"
+          lede="AI-powered deliverability optimization works on the things that are genuinely in your control — who you send to, how you send, and how you respond to what comes back. No platform can promise a mailbox provider's decision, and we won't pretend otherwise."
+        />
 
         <ol className="mt-16 grid gap-px border-t border-border sm:grid-cols-2 lg:grid-cols-3">
           {areas.map((area, index) => (

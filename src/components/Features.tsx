@@ -1,3 +1,4 @@
+import { SectionHeader } from "@/components/SectionHeader";
 import { MessageSquare, Users, Palette, Shield, BarChart3, RefreshCw } from "lucide-react";
 
 const features = [
@@ -37,15 +38,12 @@ export function Features() {
   return (
     <section id="features" className="border-t border-border px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="eyebrow">Capabilities</p>
-          <h2 className="mt-5 font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Everything you need to turn contacts into customers
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            A complete marketing workspace, with intelligence working quietly across the entire journey.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Capabilities"
+          title="Everything you need to turn contacts into customers"
+          lede="A complete marketing workspace, with intelligence working quietly across the entire journey."
+          meta="Six core capabilities"
+        />
 
         <div className="mt-16 grid border-t border-border sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
