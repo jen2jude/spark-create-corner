@@ -57,19 +57,20 @@ export function CampaignWorkspacePanel({ workspace, pending }: Props) {
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Metric icon={Users} label="Audience" value={workspace.audienceSize} note={workspace.audienceNote} />
-        <Metric icon={Target} label="Call to action" value={workspace.cta} note="Primary action for every send" />
-        <Metric icon={ShieldCheck} label="Tracking" value={workspace.tracking} note="Attributed to the objective" />
+        <Metric icon={Users} label="Audience" value={workspace.audienceSize} note={workspace.audienceNote} index={0} />
+        <Metric icon={Target} label="Call to action" value={workspace.cta} note="Primary action for every send" index={1} />
+        <Metric icon={ShieldCheck} label="Tracking" value={workspace.tracking} note="Attributed to the objective" index={2} />
         <Metric
           icon={Mail}
           label="Deliverability"
           value={workspace.deliverability}
           note={workspace.deliverabilityNote}
+          index={3}
         />
       </div>
 
       {workspace.changed.length > 0 ? (
-        <div className="rounded-xl border border-accent/30 bg-accent/5 px-5 py-4">
+        <div className="animate-rise rounded-xl border border-accent/30 bg-accent/5 px-5 py-4">
           <p className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent">
             Just changed
           </p>
@@ -105,7 +106,7 @@ export function CampaignWorkspacePanel({ workspace, pending }: Props) {
           </div>
 
           {email ? (
-            <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
+            <div key={active} className="animate-fade-in mt-5 overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
               <div className="space-y-1 border-b border-border bg-muted/40 px-4 py-4 sm:px-6">
                 <p className="text-xs text-muted-foreground">From {email.sender}</p>
                 <p className="text-base font-semibold text-foreground">{email.subject}</p>
@@ -144,14 +145,19 @@ function Metric({
   label,
   value,
   note,
+  index = 0,
 }: {
   icon: typeof Users;
   label: string;
   value: string;
   note: string;
+  index?: number;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card px-4 py-4">
+    <div
+      className="animate-rise hover-lift rounded-xl border border-border bg-card px-4 py-4"
+      style={{ animationDelay: `${index * 80}ms` }}
+    >
       <p className="flex items-center gap-2 text-[0.625rem] font-medium uppercase tracking-[0.2em] text-muted-foreground">
         <Icon className="h-3.5 w-3.5" />
         {label}
