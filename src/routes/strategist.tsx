@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CampaignWorkspacePanel } from "@/components/CampaignWorkspacePanel";
 import { planCampaign } from "@/lib/strategist.functions";
 import type { CampaignPlan, StrategistTurn } from "@/lib/strategist.types";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const DIMENSION_LABELS: Record<string, string> = {
   objective: "Campaign objective",
