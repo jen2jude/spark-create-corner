@@ -70,13 +70,30 @@ export function ProductTour() {
           Six surfaces, one continuous flow. Every step is visible, editable, and reversible.
         </p>
 
-        <div className="-mx-6 mt-10 flex gap-x-6 overflow-x-auto border-b border-border px-6 sm:mx-0 sm:mt-12 sm:flex-wrap sm:gap-x-8 sm:gap-y-3 sm:overflow-visible sm:px-0">
+        <div
+          role="tablist"
+          aria-label="Workspace surfaces"
+          onKeyDown={(e) => {
+            if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+            e.preventDefault();
+            const next =
+              e.key === "ArrowRight"
+                ? (active + 1) % tabs.length
+                : (active - 1 + tabs.length) % tabs.length;
+            setActive(next);
+            document.getElementById(`tour-tab-${tabs[next]!.id}`)?.focus();
+          }}
+          className="-mx-6 mt-10 flex gap-x-6 overflow-x-auto border-b border-border px-6 sm:mx-0 sm:mt-12 sm:flex-wrap sm:gap-x-8 sm:gap-y-3 sm:overflow-visible sm:px-0">
           {tabs.map((t, i) => (
             <button
               key={t.id}
               type="button"
+              id={`tour-tab-${t.id}`}
+              role="tab"
+              aria-selected={i === active}
+              aria-controls={`tour-panel-${t.id}`}
+              tabIndex={i === active ? 0 : -1}
               onClick={() => setActive(i)}
-              aria-current={i === active}
               className={cn(
                 "relative -mb-px shrink-0 whitespace-nowrap pb-3 text-sm font-medium tracking-wide transition-colors duration-300",
                 i === active
@@ -89,7 +106,12 @@ export function ProductTour() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:items-start lg:gap-14">
+        <div
+          id={`tour-panel-${tab.id}`}
+          role="tabpanel"
+          aria-labelledby={`tour-tab-${tab.id}`}
+          tabIndex={0}
+          className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:items-start lg:gap-14">
           <div key={tab.id} className="animate-fade-in">
             <h3 className="font-serif text-2xl font-semibold text-foreground">{tab.heading}</h3>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tab.body}</p>

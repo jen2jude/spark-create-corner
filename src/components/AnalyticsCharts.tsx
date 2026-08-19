@@ -59,7 +59,11 @@ export function ProgressChart() {
   ];
 
   return (
-    <div className="h-[150px] w-full">
+    <div
+      className="h-[150px] w-full"
+      role="img"
+      aria-label="Registrations over the campaign, rising from 0 on day 1 to 341 by day 11."
+    >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={data} margin={{ top: 6, right: 6, bottom: 0, left: 0 }}>
           <CartesianGrid stroke="var(--border)" strokeOpacity={0.5} vertical={false} />
@@ -95,7 +99,11 @@ export function SegmentChart() {
   ];
 
   return (
-    <div className="h-[150px] w-full">
+    <div
+      className="h-[150px] w-full"
+      role="img"
+      aria-label="Conversions by segment: past attendees 164, trial signups 91, newsletter 71, referrals 15."
+    >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} layout="vertical" margin={{ top: 4, right: 14, bottom: 0, left: 0 }}>
           <CartesianGrid stroke="var(--border)" strokeOpacity={0.5} horizontal={false} />
@@ -137,9 +145,9 @@ export function FunnelChart() {
   ];
 
   return (
-    <div className="space-y-2.5">
+    <ul className="space-y-2.5">
       {steps.map((s, i) => (
-        <div key={s.label}>
+        <li key={s.label}>
           <div className="flex items-baseline justify-between gap-3 text-xs">
             <span className="text-muted-foreground">{s.label}</span>
             <span className="whitespace-nowrap text-foreground">
@@ -147,7 +155,14 @@ export function FunnelChart() {
               <span className="text-muted-foreground">({s.pct}%)</span>
             </span>
           </div>
-          <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-muted">
+          <div
+            className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-muted"
+            role="progressbar"
+            aria-valuenow={s.pct}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={`${s.label}: ${s.pct}% of delivered`}
+          >
             <div
               className="animate-progress h-full rounded-full bg-accent"
               style={{
@@ -157,9 +172,9 @@ export function FunnelChart() {
               }}
             />
           </div>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
