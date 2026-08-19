@@ -3,7 +3,7 @@ import { getWaitlistStats } from "@/lib/waitlist.functions";
 
 function useCountUp(target: number | null) {
   const [value, setValue] = useState(0);
-  const frame = useRef<number>();
+  const frame = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (target === null) return;
@@ -33,8 +33,8 @@ export function EarlyAccessCounter() {
 
   useEffect(() => {
     let cancelled = false;
-    getWaitlistStats()
-      .then((data) => {
+    getWaitlistStats({ data: undefined })
+      .then((data: { signups: number; companies: number }) => {
         if (!cancelled) setStats(data);
       })
       .catch(() => {
