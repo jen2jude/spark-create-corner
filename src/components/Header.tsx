@@ -14,7 +14,10 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full">
       <div className="border-b border-border bg-background">
         <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-6 text-xs text-muted-foreground lg:px-8">
-          <span className="font-medium uppercase tracking-[0.28em]">Oventric</span>
+          <span className="font-medium uppercase tracking-[0.28em]">
+            Oventric <span className="hidden sm:inline text-muted-foreground/70">· ecosystem</span>
+          </span>
+
           <div className="flex items-center gap-6">
             <a href="#waitlist" className="hover:text-foreground">Early access</a>
             <a href="#waitlist" className="font-medium text-accent hover:opacity-80">Sign in</a>
