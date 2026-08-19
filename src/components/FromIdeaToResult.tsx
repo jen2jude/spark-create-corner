@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 
 const steps = [
@@ -43,10 +44,111 @@ const steps = [
   },
 ];
 
+/** Tracks how far the list has scrolled through the viewport, 0 → 1, for the progress spine. */
+function useScrollProgress(ref: React.RefObject<HTMLElement | null>) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const rect = el.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      // Start filling once the top enters the lower half of the viewport,
+      // finish once the bottom passes the upper third — keeps the fill
+      // roughly in sync with the steps actually being read.
+      const start = viewportH * 0.85;
+      const end = viewportH * 0.25;
+      const total = rect.height + (start - end);
+      const traveled = start - rect.top;
+      const pct = Math.min(1, Math.max(0, traveled / total));
+      setProgress(pct);
+    };
+
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [ref]);
+
+  return progress;
+}
+
+/** Fades + lifts a step in once it enters the viewport. */
+function useRevealed<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
+          setRevealed(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return [ref, revealed] as const;
+}
+
+function Step({ step, index }: { step: (typeof steps)[number]; index: number }) {
+  const number = String(index + 1).padStart(2, "0");
+  const [ref, revealed] = useRevealed<HTMLLIElement>();
+
+  return (
+    <li
+      ref={ref}
+      className={`group relative flex gap-4 pl-14 transition-all duration-500 ease-out sm:gap-5 ${
+        revealed ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+      }`}
+      style={{ transitionDelay: revealed ? `${Math.min(index, 5) * 60}ms` : "0ms" }}
+    >
+      <div className="absolute left-0 top-0.5 z-10 flex h-7 w-7 items-center justify-center rounded-full border border-border bg-card text-[0.625rem] font-bold text-foreground shadow-soft transition-colors duration-300 group-hover:border-accent group-hover:text-accent">
+        {index + 1}
+      </div>
+
+      <div className="w-full rounded-xl border border-border bg-background px-4 py-3.5 shadow-soft transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-accent/30 group-hover:shadow-lift">
+        <p className="text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-accent">
+          Step {number}
+        </p>
+        <h3 className="mt-1 font-serif text-base font-semibold leading-snug text-foreground sm:text-lg">
+          {step.title}
+        </h3>
+        <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground sm:text-sm">
+          {step.body}
+        </p>
+      </div>
+    </li>
+  );
+}
+
 export function FromIdeaToResult() {
+  const listRef = useRef<HTMLOListElement>(null);
+  const progress = useScrollProgress(listRef);
+
   return (
     <section id="workflow" className="border-t border-border bg-card px-6 py-24 lg:px-8 lg:py-32">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-4xl">
         <SectionHeader
           eyebrow="The journey"
           title="From an idea to a measurable result."
@@ -54,52 +156,20 @@ export function FromIdeaToResult() {
           meta="Ten steps, one goal"
         />
 
-        <div className="relative mt-16">
+        <div className="relative mt-14">
+          {/* Base spine */}
+          <div className="absolute left-3.5 top-0 h-full w-px bg-border" aria-hidden />
+          {/* Progress spine — fills as the list scrolls through view */}
           <div
-            className="absolute left-4 top-0 h-full w-px bg-border lg:left-1/2"
+            className="absolute left-3.5 top-0 w-px bg-accent transition-[height] duration-150 ease-out"
+            style={{ height: `${progress * 100}%` }}
             aria-hidden
           />
-          <ol className="relative space-y-10 sm:space-y-12">
-            {steps.map((step, index) => {
-              const number = String(index + 1).padStart(2, "0");
-              const isEven = index % 2 === 1;
-              return (
-                <li
-                  key={step.title}
-                  className={`relative flex items-start gap-6 lg:items-center ${
-                    isEven ? "lg:flex-row-reverse" : ""
-                  }`}
-                >
-                  <div
-                    className={`flex-1 lg:w-1/2 ${
-                      isEven ? "lg:pl-16" : "lg:pr-16"
-                    } ${isEven ? "lg:text-left" : "lg:text-right"}`}
-                  >
-                    <div
-                      className={`rounded-2xl border border-border bg-background p-6 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift sm:p-8 ${
-                        isEven ? "lg:ml-auto" : ""
-                      }`}
-                    >
-                      <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-accent">
-                        Step {number}
-                      </p>
-                      <h3 className="mt-2 font-serif text-xl font-semibold text-foreground sm:text-2xl">
-                        {step.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                        {step.body}
-                      </p>
-                    </div>
-                  </div>
 
-                  <div className="absolute left-4 top-0 z-10 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full border border-border bg-card text-[0.6875rem] font-bold text-foreground shadow-soft lg:left-1/2">
-                    {index + 1}
-                  </div>
-
-                  <div className="hidden lg:block lg:w-1/2" aria-hidden />
-                </li>
-              );
-            })}
+          <ol ref={listRef} className="relative space-y-3">
+            {steps.map((step, index) => (
+              <Step key={step.title} step={step} index={index} />
+            ))}
           </ol>
         </div>
       </div>
