@@ -239,9 +239,9 @@ function StrategistPage() {
                       }
                       className="resize-none text-sm"
                     />
-                    <div className="mt-3 flex items-center justify-between gap-3">
-                      <p className="text-xs text-muted-foreground">Enter to send</p>
-                      <Button type="submit" disabled={pending || !input.trim()}>
+                    <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <p className="hidden text-xs text-muted-foreground sm:block">Enter to send</p>
+                      <Button type="submit" disabled={pending || !input.trim()} className="w-full sm:w-auto">
                         {plan ? "Update campaign" : "Build the campaign"}
                         <ArrowUp className="ml-2 h-4 w-4" />
                       </Button>
@@ -259,9 +259,17 @@ function StrategistPage() {
                   <button
                     type="button"
                     onClick={() => setView("workspace")}
-                    className="mt-4 text-sm font-medium text-accent underline-offset-4 hover:underline"
+                    className="mt-4 w-full rounded-xl border border-border bg-card p-4 text-left transition-colors hover:border-foreground/40 sm:w-auto sm:border-0 sm:bg-transparent sm:p-0"
                   >
-                    See what Oventric built →
+                    <span className="block text-[0.625rem] font-medium uppercase tracking-[0.2em] text-muted-foreground sm:hidden">
+                      Campaign status
+                    </span>
+                    <span className="mt-1.5 block truncate text-sm font-medium text-foreground sm:hidden">
+                      {plan.workspace?.campaignName ?? "Campaign ready"}
+                    </span>
+                    <span className="mt-1.5 block text-sm font-medium text-accent">
+                      See what Oventric built →
+                    </span>
                   </button>
                 ) : null}
 
