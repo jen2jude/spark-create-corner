@@ -8,6 +8,7 @@ import { DataResponsibility } from "@/components/DataResponsibility";
 import { Faq } from "@/components/Faq";
 import { FromIdeaToResult } from "@/components/FromIdeaToResult";
 import { Features } from "@/components/Features";
+import { Deliverability } from "@/components/Deliverability";
 import { AudienceSegments } from "@/components/AudienceSegments";
 import { TrustBand } from "@/components/TrustBand";
 import { WaitlistSection } from "@/components/WaitlistSection";
@@ -47,6 +48,7 @@ function Index() {
         <TemplateGallery />
         <Features />
         <AudienceSegments />
+        <Deliverability />
         <DataResponsibility />
         <Faq />
         <WaitlistSection />

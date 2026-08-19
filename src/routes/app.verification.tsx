@@ -29,13 +29,31 @@ function VerificationPage() {
       description="Checks that decide whether your email arrives — guided first, technical detail folded away."
     >
       <SectionPlaceholder
-        purpose="Verification covers address quality and sender authentication. Each item reads as a task with an outcome; DNS records live behind an Advanced disclosure."
+        purpose="Verification covers everything that decides whether your email arrives: proving the domain is yours, sending to real addresses, sending at a trusted pace, and responding to what comes back. Each item reads as a task with an outcome, and the technical names (SPF, DKIM, DMARC) sit behind an Advanced disclosure. Nothing here promises inbox placement — it improves the factors you control."
         planned={[
-          { label: "Address quality", description: "Risky and invalid addresses flagged before you send." },
-          { label: "Sender setup", description: "Guided domain and sender verification." },
-          { label: "Authentication", description: "SPF, DKIM, and DMARC handled step by step." },
+          {
+            label: "Prove the email comes from you",
+            description: "Guided domain and sender setup, with authentication records prepared for you.",
+          },
+          {
+            label: "Send to addresses that exist",
+            description: "Contact quality checks and verification before a campaign leaves.",
+          },
+          {
+            label: "Build a trusted sending habit",
+            description: "Warm-up pacing and rate limits chosen for your domain, overridable at any time.",
+          },
+          {
+            label: "Handle bounces and opt-outs",
+            description: "Failed addresses suppressed automatically and every unsubscribe honoured at once.",
+          },
+          {
+            label: "Watch engagement signals",
+            description: "Reputation trend over time, with a clear next move when something drifts.",
+          },
         ]}
       />
+
     </AppShell>
   );
 }
