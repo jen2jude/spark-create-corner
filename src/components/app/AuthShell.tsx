@@ -33,7 +33,7 @@ export function AuthShell({
             <Text variant="muted">{intro}</Text>
           </div>
 
-          <Notice tone="accent" title="Early access">
+          <Notice tone="info" title="Early access">
             Accounts open when early access begins. Join the waitlist and we will invite you.
           </Notice>
 
