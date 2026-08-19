@@ -62,6 +62,7 @@ export const Route = createFileRoute("/strategist")({
 
 function StrategistPage() {
   const submitPlan = useServerFn(planCampaign);
+  const isMobile = useIsMobile();
   const [input, setInput] = useState("");
   const [turns, setTurns] = useState<StrategistTurn[]>([]);
   const [plan, setPlan] = useState<CampaignPlan | null>(null);
@@ -71,6 +72,11 @@ function StrategistPage() {
   const [view, setView] = useState<View>("split");
   const [tab, setTab] = useState<VisualTab>("campaign");
   const threadRef = useRef<HTMLDivElement | null>(null);
+
+  // Mobile is conversation-first: the split surface is a desktop/tablet affordance.
+  useEffect(() => {
+    if (isMobile && view === "split") setView("conversation");
+  }, [isMobile, view]);
 
   useEffect(() => {
     threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: "smooth" });
