@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProductRouteImport } from './routes/product'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StrategistRouteImport } from './routes/strategist'
 import { Route as ThanksRouteImport } from './routes/thanks'
@@ -45,6 +46,11 @@ const DesignSystemRoute = DesignSystemRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductRoute = ProductRouteImport.update({
+  id: '/product',
+  path: '/product',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/design-system': typeof DesignSystemRoute
   '/login': typeof LoginRoute
+  '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/design-system': typeof DesignSystemRoute
   '/login': typeof LoginRoute
+  '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
@@ -156,6 +164,7 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/design-system': typeof DesignSystemRoute
   '/login': typeof LoginRoute
+  '/product': typeof ProductRoute
   '/signup': typeof SignupRoute
   '/strategist': typeof StrategistRoute
   '/thanks': typeof ThanksRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/design-system'
     | '/login'
+    | '/product'
     | '/signup'
     | '/strategist'
     | '/thanks'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/'
     | '/design-system'
     | '/login'
+    | '/product'
     | '/signup'
     | '/strategist'
     | '/thanks'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/design-system'
     | '/login'
+    | '/product'
     | '/signup'
     | '/strategist'
     | '/thanks'
@@ -234,6 +246,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   DesignSystemRoute: typeof DesignSystemRoute
   LoginRoute: typeof LoginRoute
+  ProductRoute: typeof ProductRoute
   SignupRoute: typeof SignupRoute
   StrategistRoute: typeof StrategistRoute
   ThanksRoute: typeof ThanksRoute
@@ -267,6 +280,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product': {
+      id: '/product'
+      path: '/product'
+      fullPath: '/product'
+      preLoaderRoute: typeof ProductRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -396,6 +416,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   DesignSystemRoute: DesignSystemRoute,
   LoginRoute: LoginRoute,
+  ProductRoute: ProductRoute,
   SignupRoute: SignupRoute,
   StrategistRoute: StrategistRoute,
   ThanksRoute: ThanksRoute,
