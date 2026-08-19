@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ProductPreview } from "@/components/ProductPreview";
-import { StrategistDemo } from "@/components/StrategistDemo";
 import { ProductTour } from "@/components/ProductTour";
 import { TemplateGallery } from "@/components/TemplateGallery";
 import { DataResponsibility } from "@/components/DataResponsibility";
@@ -36,7 +35,6 @@ function Index() {
       <main>
         <Hero />
         <ProductPreview />
-        <StrategistDemo />
         <TrustBand />
         <ProductTour />
         <FromIdeaToResult />
