@@ -21,13 +21,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="hidden border-b border-border bg-background sm:block">
-        <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-6 text-xs text-muted-foreground lg:px-8">
+        <div className="mx-auto flex h-10 max-w-7xl items-center px-6 text-xs text-muted-foreground lg:px-8">
           <span className="font-medium uppercase tracking-[0.28em]">
             Oventric <span className="hidden sm:inline text-muted-foreground/70">· ecosystem</span>
           </span>
-
-          <div className="flex items-center gap-6" />
-
         </div>
       </div>
 
