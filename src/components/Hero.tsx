@@ -11,8 +11,14 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-hero px-6 pb-28 pt-20 lg:px-8 lg:pb-36 lg:pt-28">
       <div
-        className="pointer-events-none absolute -right-40 top-10 h-[32rem] w-[32rem] rounded-full opacity-40 blur-3xl"
-        style={{ background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)" }}
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--foreground) 1px, transparent 1px), linear-gradient(to bottom, var(--foreground) 1px, transparent 1px)",
+          backgroundSize: "88px 88px",
+          maskImage: "radial-gradient(120% 90% at 80% 0%, black 0%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(120% 90% at 80% 0%, black 0%, transparent 70%)",
+        }}
         aria-hidden
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
