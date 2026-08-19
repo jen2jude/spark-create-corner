@@ -116,17 +116,17 @@ function StrategistPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="px-6 py-14 lg:px-8 lg:py-20">
+      <main className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-3xl">
               <p className="text-xs font-medium uppercase tracking-[0.32em] text-muted-foreground">
                 Campaign workspace
               </p>
-              <h1 className="mt-5 font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              <h1 className="mt-4 font-serif text-[1.75rem] font-bold leading-tight tracking-tight text-foreground sm:mt-5 sm:text-4xl">
                 Describe the outcome you want
               </h1>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Talk on one side, watch the campaign build on the other. Oventric Mail decides the
                 audience, segmentation, sequence, timing, and follow-up — then writes the emails, so
                 you can read exactly what it made and change it in words.
@@ -136,29 +136,31 @@ function StrategistPage() {
             <div
               role="group"
               aria-label="Workspace view"
-              className="flex rounded-full border border-border bg-card p-1"
+              className="flex w-full rounded-full border border-border bg-card p-1 sm:w-auto"
             >
-              {views.map((v) => (
-                <button
-                  key={v.id}
-                  type="button"
-                  onClick={() => setView(v.id)}
-                  aria-pressed={view === v.id}
-                  className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-colors ${
-                    view === v.id
-                      ? "bg-foreground text-background"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <v.icon className="h-3.5 w-3.5" />
-                  {v.label}
-                </button>
-              ))}
+              {views
+                .filter((v) => !(isMobile && v.id === "split"))
+                .map((v) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    onClick={() => setView(v.id)}
+                    aria-pressed={view === v.id}
+                    className={`flex flex-1 items-center justify-center gap-2 rounded-full px-3 py-2 text-xs font-medium transition-colors sm:flex-none sm:px-4 ${
+                      view === v.id
+                        ? "bg-foreground text-background"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <v.icon className="h-3.5 w-3.5 shrink-0" />
+                    {v.label}
+                  </button>
+                ))}
             </div>
           </div>
 
           <div
-            className={`mt-12 grid gap-10 lg:gap-14 ${
+            className={`mt-8 grid gap-8 sm:mt-12 lg:gap-14 ${
               view === "split" ? "lg:grid-cols-[0.85fr_1.15fr]" : "grid-cols-1"
             }`}
           >
@@ -167,8 +169,8 @@ function StrategistPage() {
                 <div className="rounded-2xl border border-border bg-card shadow-soft">
                   <div
                     ref={threadRef}
-                    className={`space-y-5 overflow-y-auto px-6 py-6 ${
-                      view === "conversation" ? "max-h-[32rem]" : "max-h-[22rem]"
+                    className={`space-y-5 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 ${
+                      view === "conversation" ? "max-h-[60vh] sm:max-h-[32rem]" : "max-h-[22rem]"
                     }`}
                   >
                     {turns.length === 0 ? (
