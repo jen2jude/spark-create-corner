@@ -26,10 +26,8 @@ export function Hero() {
           <p className="text-xs font-medium uppercase tracking-[0.32em] text-hero-muted">
             Early access
           </p>
-          <h1 className="mt-5 font-sans text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-hero-foreground sm:mt-6 sm:text-6xl lg:text-7xl">
-            Marketing campaigns,
-            <br />
-            guided by conversation
+          <h1 className="mt-5 max-w-[14ch] text-balance font-sans text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-hero-foreground sm:mt-6 sm:text-6xl lg:text-6xl">
+            Marketing campaigns, guided by conversation
           </h1>
           <p className="mt-6 max-w-xl text-base sm:mt-7 sm:text-lg leading-relaxed text-hero-muted">
             Build, send and optimize marketing campaigns through a simple conversation — from your
