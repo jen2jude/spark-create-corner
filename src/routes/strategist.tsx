@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CampaignWorkspacePanel } from "@/components/CampaignWorkspacePanel";
 import { planCampaign } from "@/lib/strategist.functions";
 import type { CampaignPlan, StrategistTurn } from "@/lib/strategist.types";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const DIMENSION_LABELS: Record<string, string> = {
   objective: "Campaign objective",
@@ -62,6 +63,7 @@ export const Route = createFileRoute("/strategist")({
 
 function StrategistPage() {
   const submitPlan = useServerFn(planCampaign);
+  const isMobile = useIsMobile();
   const [input, setInput] = useState("");
   const [turns, setTurns] = useState<StrategistTurn[]>([]);
   const [plan, setPlan] = useState<CampaignPlan | null>(null);
@@ -71,6 +73,11 @@ function StrategistPage() {
   const [view, setView] = useState<View>("split");
   const [tab, setTab] = useState<VisualTab>("campaign");
   const threadRef = useRef<HTMLDivElement | null>(null);
+
+  // Mobile is conversation-first: the split surface is a desktop/tablet affordance.
+  useEffect(() => {
+    if (isMobile && view === "split") setView("conversation");
+  }, [isMobile, view]);
 
   useEffect(() => {
     threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: "smooth" });
@@ -109,17 +116,17 @@ function StrategistPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="px-6 py-14 lg:px-8 lg:py-20">
+      <main className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-3xl">
               <p className="text-xs font-medium uppercase tracking-[0.32em] text-muted-foreground">
                 Campaign workspace
               </p>
-              <h1 className="mt-5 font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              <h1 className="mt-4 font-serif text-[1.75rem] font-bold leading-tight tracking-tight text-foreground sm:mt-5 sm:text-4xl">
                 Describe the outcome you want
               </h1>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Talk on one side, watch the campaign build on the other. Oventric Mail decides the
                 audience, segmentation, sequence, timing, and follow-up — then writes the emails, so
                 you can read exactly what it made and change it in words.
@@ -129,29 +136,31 @@ function StrategistPage() {
             <div
               role="group"
               aria-label="Workspace view"
-              className="flex rounded-full border border-border bg-card p-1"
+              className="flex w-full rounded-full border border-border bg-card p-1 sm:w-auto"
             >
-              {views.map((v) => (
-                <button
-                  key={v.id}
-                  type="button"
-                  onClick={() => setView(v.id)}
-                  aria-pressed={view === v.id}
-                  className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-colors ${
-                    view === v.id
-                      ? "bg-foreground text-background"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <v.icon className="h-3.5 w-3.5" />
-                  {v.label}
-                </button>
-              ))}
+              {views
+                .filter((v) => !(isMobile && v.id === "split"))
+                .map((v) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    onClick={() => setView(v.id)}
+                    aria-pressed={view === v.id}
+                    className={`flex flex-1 items-center justify-center gap-2 rounded-full px-3 py-2 text-xs font-medium transition-colors sm:flex-none sm:px-4 ${
+                      view === v.id
+                        ? "bg-foreground text-background"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <v.icon className="h-3.5 w-3.5 shrink-0" />
+                    {v.label}
+                  </button>
+                ))}
             </div>
           </div>
 
           <div
-            className={`mt-12 grid gap-10 lg:gap-14 ${
+            className={`mt-8 grid gap-8 sm:mt-12 lg:gap-14 ${
               view === "split" ? "lg:grid-cols-[0.85fr_1.15fr]" : "grid-cols-1"
             }`}
           >
@@ -160,8 +169,8 @@ function StrategistPage() {
                 <div className="rounded-2xl border border-border bg-card shadow-soft">
                   <div
                     ref={threadRef}
-                    className={`space-y-5 overflow-y-auto px-6 py-6 ${
-                      view === "conversation" ? "max-h-[32rem]" : "max-h-[22rem]"
+                    className={`space-y-5 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 ${
+                      view === "conversation" ? "max-h-[60vh] sm:max-h-[32rem]" : "max-h-[22rem]"
                     }`}
                   >
                     {turns.length === 0 ? (
@@ -230,9 +239,9 @@ function StrategistPage() {
                       }
                       className="resize-none text-sm"
                     />
-                    <div className="mt-3 flex items-center justify-between gap-3">
-                      <p className="text-xs text-muted-foreground">Enter to send</p>
-                      <Button type="submit" disabled={pending || !input.trim()}>
+                    <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <p className="hidden text-xs text-muted-foreground sm:block">Enter to send</p>
+                      <Button type="submit" disabled={pending || !input.trim()} className="w-full sm:w-auto">
                         {plan ? "Update campaign" : "Build the campaign"}
                         <ArrowUp className="ml-2 h-4 w-4" />
                       </Button>
@@ -250,9 +259,17 @@ function StrategistPage() {
                   <button
                     type="button"
                     onClick={() => setView("workspace")}
-                    className="mt-4 text-sm font-medium text-accent underline-offset-4 hover:underline"
+                    className="mt-4 w-full rounded-xl border border-border bg-card p-4 text-left transition-colors hover:border-foreground/40 sm:w-auto sm:border-0 sm:bg-transparent sm:p-0"
                   >
-                    See what Oventric built →
+                    <span className="block text-[0.625rem] font-medium uppercase tracking-[0.2em] text-muted-foreground sm:hidden">
+                      Campaign status
+                    </span>
+                    <span className="mt-1.5 block truncate text-sm font-medium text-foreground sm:hidden">
+                      {plan.workspace?.campaignName ?? "Campaign ready"}
+                    </span>
+                    <span className="mt-1.5 block text-sm font-medium text-accent">
+                      See what Oventric built →
+                    </span>
                   </button>
                 ) : null}
 
@@ -333,22 +350,22 @@ function StrategistPage() {
                               disabled={!dimension}
                               onClick={() => setOpen(isOpen ? null : key)}
                               aria-expanded={isOpen}
-                              className={`flex w-full items-baseline gap-4 py-4 text-left transition-opacity duration-500 ${
+                              className={`grid w-full grid-cols-[1.5rem_minmax(0,1fr)_auto] items-baseline gap-x-3 gap-y-1 py-4 text-left transition-opacity duration-500 sm:flex sm:gap-4 ${
                                 dimension ? "opacity-100" : "opacity-30"
                               }`}
                             >
                               <span className="w-6 shrink-0 font-serif text-sm text-muted-foreground">
                                 {String(i + 1).padStart(2, "0")}
                               </span>
-                              <span className="w-[9.5rem] shrink-0 text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                              <span className="min-w-0 text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted-foreground sm:w-[9.5rem] sm:shrink-0">
                                 {DIMENSION_LABELS[key]}
                               </span>
-                              <span className="flex-1 text-sm leading-relaxed text-foreground">
+                              {dimension ? (
+                                <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-accent sm:order-3" />
+                              ) : null}
+                              <span className="col-start-2 min-w-0 text-sm leading-relaxed text-foreground sm:order-2 sm:flex-1">
                                 {dimension ? dimension.summary : "Pending"}
                               </span>
-                              {dimension ? (
-                                <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-accent" />
-                              ) : null}
                             </button>
                             {isOpen && dimension?.detail ? (
                               <p className="animate-fade-in pb-5 pl-[2rem] text-sm leading-relaxed text-muted-foreground sm:pl-[12.5rem]">

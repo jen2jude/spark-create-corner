@@ -15,7 +15,7 @@ export function CampaignWorkspacePanel({ workspace, pending }: Props) {
 
   if (!workspace) {
     return (
-      <div className="rounded-2xl border border-border bg-card p-8">
+      <div className="rounded-2xl border border-border bg-card p-5 sm:p-8">
         <p className="text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-muted-foreground">
           Campaign workspace
         </p>
@@ -47,7 +47,7 @@ export function CampaignWorkspacePanel({ workspace, pending }: Props) {
           <p className="text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-muted-foreground">
             Campaign workspace
           </p>
-          <h2 className="mt-2 font-serif text-2xl font-bold tracking-tight text-foreground">
+          <h2 className="mt-2 font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground">
             {workspace.campaignName}
           </h2>
         </div>
@@ -56,7 +56,7 @@ export function CampaignWorkspacePanel({ workspace, pending }: Props) {
         </p>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Metric icon={Users} label="Audience" value={workspace.audienceSize} note={workspace.audienceNote} />
         <Metric icon={Target} label="Call to action" value={workspace.cta} note="Primary action for every send" />
         <Metric icon={ShieldCheck} label="Tracking" value={workspace.tracking} note="Attributed to the objective" />
@@ -86,14 +86,14 @@ export function CampaignWorkspacePanel({ workspace, pending }: Props) {
 
       {workspace.emails.length > 0 ? (
         <div>
-          <div className="flex flex-wrap gap-2">
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
             {workspace.emails.map((e, i) => (
               <button
                 key={`${e.subject}-${i}`}
                 type="button"
                 onClick={() => setActive(i)}
                 aria-pressed={i === active}
-                className={`rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
+                className={`shrink-0 rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
                   i === active
                     ? "border-foreground bg-foreground text-background"
                     : "border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground"
@@ -106,12 +106,12 @@ export function CampaignWorkspacePanel({ workspace, pending }: Props) {
 
           {email ? (
             <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
-              <div className="space-y-1 border-b border-border bg-muted/40 px-6 py-4">
+              <div className="space-y-1 border-b border-border bg-muted/40 px-4 py-4 sm:px-6">
                 <p className="text-xs text-muted-foreground">From {email.sender}</p>
                 <p className="text-base font-semibold text-foreground">{email.subject}</p>
                 <p className="text-xs text-muted-foreground">{email.preheader}</p>
               </div>
-              <div className="space-y-4 px-6 py-8 sm:px-10">
+              <div className="space-y-4 px-4 py-6 sm:px-10 sm:py-8">
                 {email.body.map((p, i) => (
                   <p key={i} className="text-sm leading-relaxed text-foreground">
                     {p}
@@ -128,7 +128,7 @@ export function CampaignWorkspacePanel({ workspace, pending }: Props) {
                   <p className="pt-2 text-sm leading-relaxed text-muted-foreground">{email.signoff}</p>
                 ) : null}
               </div>
-              <p className="border-t border-border px-6 py-3 text-[0.625rem] uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="border-t border-border px-4 py-3 sm:px-6 text-[0.625rem] uppercase tracking-[0.18em] text-muted-foreground">
                 Draft · nothing is sent until you approve it
               </p>
             </div>

@@ -60,17 +60,17 @@ export function ProductTour() {
   const Screen = tab.screen;
 
   return (
-    <section id="product" className="border-t border-border bg-secondary/50 px-6 py-24 lg:px-8 lg:py-32">
+    <section id="product" className="border-t border-border bg-secondary/50 px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-6xl">
         <p className="eyebrow">The workspace</p>
-        <h2 className="mt-5 max-w-2xl font-serif text-4xl font-semibold leading-[1.1] tracking-tight text-foreground lg:text-5xl">
+        <h2 className="mt-5 max-w-2xl font-serif text-3xl sm:text-4xl font-semibold leading-[1.1] tracking-tight text-foreground lg:text-5xl">
           Build a campaign in minutes, not afternoons
         </h2>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           Six surfaces, one continuous flow. Every step is visible, editable, and reversible.
         </p>
 
-        <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-b border-border">
+        <div className="-mx-6 mt-10 flex gap-x-6 overflow-x-auto border-b border-border px-6 sm:mx-0 sm:mt-12 sm:flex-wrap sm:gap-x-8 sm:gap-y-3 sm:overflow-visible sm:px-0">
           {tabs.map((t, i) => (
             <button
               key={t.id}
@@ -78,7 +78,7 @@ export function ProductTour() {
               onClick={() => setActive(i)}
               aria-current={i === active}
               className={cn(
-                "relative -mb-px pb-3 text-sm font-medium tracking-wide transition-colors duration-300",
+                "relative -mb-px shrink-0 whitespace-nowrap pb-3 text-sm font-medium tracking-wide transition-colors duration-300",
                 i === active
                   ? "text-foreground after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-accent"
                   : "text-muted-foreground hover:text-foreground",
