@@ -45,29 +45,40 @@ export function HeroSignup() {
         Get started with guided campaigns.
       </h2>
 
-      <div className="mt-5 flex flex-wrap gap-5">
-        {intents.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            onClick={() => setIntent(option.value)}
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <span
-              className={
-                intent === option.value
-                  ? "flex h-4 w-4 items-center justify-center rounded-full border-2 border-accent"
-                  : "flex h-4 w-4 items-center justify-center rounded-full border border-border"
-              }
+      <fieldset className="mt-5">
+        <legend className="sr-only">Who are you sending for?</legend>
+        <div className="flex flex-wrap gap-5">
+          {intents.map((option) => (
+            <label
+              key={option.value}
+              className="flex cursor-pointer items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
             >
-              {intent === option.value && <span className="h-2 w-2 rounded-full bg-accent" />}
-            </span>
-            <span className={intent === option.value ? "text-foreground" : undefined}>
-              {option.label}
-            </span>
-          </button>
-        ))}
-      </div>
+              <input
+                type="radio"
+                name="hero-intent"
+                value={option.value}
+                checked={intent === option.value}
+                onChange={() => setIntent(option.value)}
+                className="peer sr-only"
+              />
+              <span
+                aria-hidden="true"
+                className={
+                  intent === option.value
+                    ? "flex h-4 w-4 items-center justify-center rounded-full border-2 border-accent peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ring"
+                    : "flex h-4 w-4 items-center justify-center rounded-full border border-border peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ring"
+                }
+              >
+                {intent === option.value && <span className="h-2 w-2 rounded-full bg-accent" />}
+              </span>
+              <span className={intent === option.value ? "text-foreground" : undefined}>
+                {option.label}
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         {error && (
