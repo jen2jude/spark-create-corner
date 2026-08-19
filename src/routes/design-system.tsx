@@ -286,7 +286,6 @@ function DesignSystemPage() {
                 <TextField
                   label="Preheader"
                   multiline
-                  rows={3}
                   placeholder="One line that appears next to the subject"
                 />
                 <TextField
