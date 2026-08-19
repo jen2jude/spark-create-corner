@@ -227,14 +227,14 @@ type Phase = "idle" | "reading" | "planning" | "done";
 
 export function StrategistDemo() {
   const [active, setActive] = useState(0);
-  const [input, setInput] = useState(scenarios[0].prompt);
-  const [submitted, setSubmitted] = useState<string>(scenarios[0].prompt);
+  const [input, setInput] = useState(scenarios[0]!.prompt);
+  const [submitted, setSubmitted] = useState<string>(scenarios[0]!.prompt);
   const [phase, setPhase] = useState<Phase>("idle");
   const [revealed, setRevealed] = useState(0);
   const [open, setOpen] = useState<number | null>(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const scenario = scenarios[active];
+  const scenario = scenarios[active] ?? scenarios[0]!;
   const total = scenario.dimensions.length;
 
   const clearTimers = () => {
@@ -258,10 +258,11 @@ export function StrategistDemo() {
     };
 
     push(() => setPhase("planning"), 900);
-    for (let i = 1; i <= scenarios[index].dimensions.length; i += 1) {
+    const count = scenarios[index]!.dimensions.length;
+    for (let i = 1; i <= count; i += 1) {
       push(() => setRevealed(i), 900 + i * 260);
     }
-    push(() => setPhase("done"), 900 + scenarios[index].dimensions.length * 260 + 200);
+    push(() => setPhase("done"), 900 + count * 260 + 200);
   };
 
   const statusLabel = useMemo(() => {
