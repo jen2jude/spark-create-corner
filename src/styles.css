@@ -185,30 +185,40 @@
   animation: rise-in 700ms var(--ease-fluid) both;
 }
 
-/* Brand mark: O -> motion -> Mail -> O. Subtle, slow, non-looping-feel loop. */
+/* Brand mark: O -> motion -> Mail. Plays once on page load, then holds on the envelope. */
 @keyframes mark-ring-trace {
   0% { stroke-dashoffset: 119.4; }
-  28% { stroke-dashoffset: 0; }
-  90% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -119.4; }
+  45% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
 }
 
 @keyframes mark-envelope-reveal {
-  0%, 42% { opacity: 0; transform: scale(0.94); }
-  56%, 76% { opacity: 1; transform: scale(1); }
-  90%, 100% { opacity: 0; transform: scale(0.94); }
+  0%, 40% { opacity: 0; transform: scale(0.94); }
+  55%, 100% { opacity: 1; transform: scale(1); }
 }
 
 .mark-ring {
   stroke-dasharray: 119.4;
   stroke-dashoffset: 0;
-  animation: mark-ring-trace 9s var(--ease-fluid) infinite;
+  animation: mark-ring-trace 2.4s var(--ease-fluid) forwards;
 }
 
 .mark-envelope {
   opacity: 0;
   transform-origin: 24px 24px;
-  animation: mark-envelope-reveal 9s var(--ease-fluid) infinite;
+  animation: mark-envelope-reveal 2.4s var(--ease-fluid) forwards;
+}
+
+/* Static final state for non-home routes / reduced motion. */
+.mark-static .mark-ring {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+
+.mark-static .mark-envelope {
+  animation: none;
+  opacity: 1;
+  transform: scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -4,22 +4,24 @@ interface AnimatedMarkProps {
   className?: string;
   /** Unique id suffix so multiple marks can coexist without gradient id clashes. */
   idSuffix?: string | undefined;
+  /** Whether to play the O → envelope animation. When false, the mark sits in its final envelope state. */
+  animate?: boolean;
 }
 
 /**
- * The Oventric "O" that quietly resolves into an envelope and back.
+ * The Oventric "O" that quietly resolves into an envelope.
  *
- * O -> motion -> Mail -> O. Deliberately restrained: a thin RGB brand
+ * O -> motion -> Mail. Deliberately restrained: a thin RGB brand
  * signature line, no glow, no bounce. Honors prefers-reduced-motion by
- * settling on the static circle.
+ * settling on the static envelope.
  */
-export function AnimatedMark({ className, idSuffix = "mark" }: AnimatedMarkProps) {
+export function AnimatedMark({ className, idSuffix = "mark", animate = true }: AnimatedMarkProps) {
   const gradientId = `oventric-rgb-${idSuffix}`;
 
   return (
     <svg
       viewBox="0 0 48 48"
-      className={cn("shrink-0", className)}
+      className={cn("shrink-0", !animate && "mark-static", className)}
       role="img"
       aria-label="Oventric Mail"
     >
