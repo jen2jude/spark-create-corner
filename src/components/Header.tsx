@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 
 const navLinks = [
+  { href: "#product", label: "Product" },
   { href: "#workflow", label: "How it works" },
-  { href: "#preview", label: "Product" },
   { href: "#features", label: "Features" },
   { href: "#audience", label: "For you" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export function Header() {

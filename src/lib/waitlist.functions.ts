@@ -32,3 +32,21 @@ export const submitWaitlistEntry = createServerFn({ method: "POST" })
 
     return { success: true };
   });
+
+export const getWaitlistStats = createServerFn({ method: "GET" }).handler(async () => {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+  const { count } = await supabaseAdmin
+    .from("waitlist")
+    .select("*", { count: "exact", head: true });
+
+  const { data } = await supabaseAdmin.from("waitlist").select("company");
+
+  const companies = new Set(
+    (data ?? [])
+      .map((row) => (row.company ?? "").trim().toLowerCase())
+      .filter((c) => c.length > 0),
+  );
+
+  return { signups: count ?? 0, companies: companies.size };
+});

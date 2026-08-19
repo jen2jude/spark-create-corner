@@ -43,7 +43,7 @@ const spine = [
 
 export function FromIdeaToResult() {
   return (
-    <section id="workflow" className="border-t border-border px-6 py-24 lg:px-8 lg:py-32">
+    <section id="workflow" className="border-t border-border bg-card px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="eyebrow">The journey</p>

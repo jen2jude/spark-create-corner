@@ -35,7 +35,7 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="border-t border-border bg-secondary/40 px-6 py-24 lg:px-8 lg:py-32">
+    <section id="features" className="border-t border-border px-6 py-24 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="eyebrow">Capabilities</p>
