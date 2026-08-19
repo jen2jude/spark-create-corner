@@ -336,3 +336,108 @@ export function AnalyticsScreen() {
     </AppChrome>
   );
 }
+
+/**
+ * Delivery / sender readiness.
+ *
+ * Demonstrates the "complexity behind simplicity" principle: the primary surface
+ * is a plain-language guided checklist. SPF, DKIM, DMARC and the DNS record
+ * values exist, but stay folded away until the user asks for them.
+ */
+function ReadyStep({
+  state,
+  title,
+  detail,
+}: {
+  state: "done" | "active" | "waiting";
+  title: string;
+  detail: string;
+}) {
+  return (
+    <div className="flex gap-3 py-2.5">
+      <span
+        className={cn(
+          "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border text-[9px] leading-none",
+          state === "done" && "border-accent/40 bg-accent/15 text-accent",
+          state === "active" && "border-accent bg-accent text-accent-foreground",
+          state === "waiting" && "border-border text-muted-foreground",
+        )}
+      >
+        {state === "done" ? "✓" : ""}
+      </span>
+      <div className="min-w-0">
+        <p
+          className={cn(
+            "text-xs",
+            state === "waiting" ? "text-muted-foreground" : "font-medium text-foreground",
+          )}
+        >
+          {title}
+        </p>
+        <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{detail}</p>
+      </div>
+    </div>
+  );
+}
+
+export function DeliveryScreen() {
+  return (
+    <AppChrome
+      active="Delivery"
+      title="Let's get your sender ready"
+      subtitle="Three short steps so your emails can be sent from your own domain"
+    >
+      <div className="grid gap-3 lg:grid-cols-[1.25fr_1fr]">
+        <div className="rounded-lg border border-border/70 bg-background p-3.5">
+          <p className="text-xs leading-relaxed text-foreground">
+            I'll guide you through a few authentication steps so your emails arrive from
+            <span className="font-medium"> hello@yourbrand.com</span> and land in the inbox.
+            You won't need to know the technical names.
+          </p>
+
+          <div className="mt-2 divide-y divide-border/60">
+            <ReadyStep
+              state="done"
+              title="Confirm the domain you send from"
+              detail="yourbrand.com verified · owner confirmed"
+            />
+            <ReadyStep
+              state="active"
+              title="Prove the domain is yours"
+              detail="Two lines to add at your domain provider. I've prepared them — copy, paste, and I'll keep checking until they're live."
+            />
+            <ReadyStep
+              state="waiting"
+              title="Protect your name from spoofing"
+              detail="Enabled automatically once step two is live. Nothing for you to configure."
+            />
+          </div>
+
+          <details className="mt-2 rounded-md border border-border/70 bg-muted/25 px-3 py-2">
+            <summary className="cursor-pointer list-none text-[11px] font-medium text-muted-foreground">
+              Advanced · show DNS records (SPF, DKIM, DMARC)
+            </summary>
+            <div className="mt-2 space-y-1.5 font-mono text-[10px] leading-relaxed text-muted-foreground">
+              <p>TXT @ · v=spf1 include:send.oventric.com ~all</p>
+              <p>TXT ovm._domainkey · p=MIGfMA0GCSqGSIb3…</p>
+              <p>TXT _dmarc · v=DMARC1; p=quarantine; rua=…</p>
+            </div>
+          </details>
+        </div>
+
+        <div className="space-y-3">
+          <div className="rounded-lg border border-border/70 bg-background p-3">
+            <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              Sender readiness
+            </p>
+            <p className="mt-1.5 font-serif text-xl leading-none text-foreground">2 of 3</p>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              Sending unlocks the moment step two is live
+            </p>
+          </div>
+          <Recommendation text="Your records point to a Cloudflare-managed domain. I can walk you through it screen by screen, or send the two lines to whoever manages it." />
+        </div>
+      </div>
+    </AppChrome>
+  );
+}
