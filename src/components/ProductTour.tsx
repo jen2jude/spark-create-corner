@@ -5,6 +5,7 @@ import {
   AudienceScreen,
   DesignScreen,
   AnalyticsScreen,
+  DeliveryScreen,
 } from "@/components/AppScreens";
 
 const tabs = [
@@ -30,6 +31,13 @@ const tabs = [
     body: "Brand-consistent layouts generated from your goal, editable down to the sentence. No HTML, no drag-and-drop archaeology — just a clean canvas with the controls that matter.",
   },
   {
+    id: "delivery",
+    label: "Delivery",
+    screen: DeliveryScreen,
+    heading: "Technical work, handled quietly",
+    body: "Authentication, suppression, bounce handling and warm-up run in the background. Oventric asks for what it needs in plain language and folds the SPF, DKIM and DMARC detail away until you want to see it.",
+  },
+  {
     id: "analytics",
     label: "Analytics",
     screen: AnalyticsScreen,
@@ -51,7 +59,7 @@ export function ProductTour() {
           Build a campaign in minutes, not afternoons
         </h2>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Four surfaces, one continuous flow. Every step is visible, editable, and reversible.
+          Five surfaces, one continuous flow. Every step is visible, editable, and reversible.
         </p>
 
         <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-b border-border">
