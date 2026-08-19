@@ -69,7 +69,8 @@ You also build the CAMPAIGN WORKSPACE the operator sees next to the conversation
 - "emails" are the real drafts, in send order (2 to 4 of them). "step" names the send and its timing ("Email 1 · 21 days out"). "body" is 2 to 4 short paragraphs of finished copy, no placeholders like [Name] unless it is a real merge field, no markdown.
 - "sender" is a plausible from-line ("Events team <events@yourdomain.com>"). "subject" is under 60 characters, "preheader" under 90.
 - "audienceSize" is a number with thousands separators ("7,840"); "audienceNote" says how it was derived or filtered.
-- "tracking" and "deliverability" are short states an operator reads at a glance ("Enabled · opens, clicks, registrations", "Healthy"). "deliverabilityNote" explains why.
+- "cta" is the button label only, under 24 characters ("Register Now"). Never a URL.
+- "tracking" and "deliverability" are short states an operator reads at a glance ("Enabled · opens, clicks", "Healthy"). Keep each under 34 characters. "deliverabilityNote" explains why.
 - "sendWindow" is the overall window ("21 days, 4 sends, ending 12 Sep").
 - "changed" lists what you changed in THIS turn, as short phrases ("Tone: more professional", "Intro shortened"). On the first turn list what you created. Keep it to 1-4 items.
 - When the user asks for a copy change ("make the email more professional"), rewrite the affected emails and say plainly in "reply" what you adjusted.`;
