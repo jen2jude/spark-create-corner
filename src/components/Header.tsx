@@ -34,7 +34,7 @@ export function Header() {
       </div>
 
       <div className="border-b border-border/70 bg-hero/95 backdrop-blur supports-[backdrop-filter]:bg-hero/80">
-        <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex min-w-0 items-center gap-2">
             <Logo
               key={isHome ? "home" : "away"}
@@ -44,7 +44,7 @@ export function Header() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-hero-muted md:flex">
+          <nav className="hidden min-w-0 items-center gap-5 text-sm font-medium text-hero-muted md:flex lg:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -60,7 +60,7 @@ export function Header() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2">
-            <Button className="hidden rounded-full px-5 md:inline-flex" asChild>
+            <Button className="hidden rounded-full px-5 lg:inline-flex" asChild>
               <a href="#waitlist">Request early access</a>
             </Button>
 
