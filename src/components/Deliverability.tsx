@@ -1,45 +1,51 @@
 import { SectionHeader } from "@/components/SectionHeader";
+import { Shield, Globe, Users, MailCheck, RefreshCw, MousePointerClick, Activity } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const pillars = [
+  {
+    icon: Shield,
+    title: "Sender authentication",
+    body: "SPF, DKIM and DMARC alignment help prove your emails genuinely come from you.",
+  },
+  {
+    icon: Globe,
+    title: "Domain configuration",
+    body: "Guided setup for your sending domain so mailbox providers can verify your identity.",
+  },
+  {
+    icon: Users,
+    title: "Audience quality",
+    body: "Invalid, risky, disposable and duplicate contacts are flagged before send.",
+  },
+  {
+    icon: MailCheck,
+    title: "Email verification",
+    body: "Verify addresses in advance so your list stays clean and your reputation protected.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Bounce management",
+    body: "Hard and soft bounces are handled automatically to protect future delivery.",
+  },
+  {
+    icon: MousePointerClick,
+    title: "Unsubscribe handling",
+    body: "Every opt-out is honoured immediately and applied across all campaigns.",
+  },
+  {
+    icon: Activity,
+    title: "Sending practices & engagement",
+    body: "Volume pacing, send windows and engagement signals inform the next best move.",
+  },
+];
+
 /**
  * Deliverability positioning.
  *
- * Honest framing only: "built for better deliverability" / "AI-powered
+ * Honest framing only: "built with deliverability in mind" / "AI-powered
  * deliverability optimization". Never guarantees of inbox placement.
- * Plain-language outcomes lead; SPF/DKIM/DMARC and the rest of the
- * vocabulary stay folded behind an Advanced disclosure.
  */
-const areas = [
-  {
-    title: "Prove the email really comes from you",
-    plain:
-      "We walk you through claiming your domain and setting up your sending address, one screen at a time.",
-    technical: "Sender authentication, domain setup, SPF, DKIM, DMARC alignment",
-  },
-  {
-    title: "Send to addresses that actually exist",
-    plain:
-      "Risky, invalid, and duplicate contacts are flagged before a campaign goes out, not after it damages your reputation.",
-    technical: "Contact quality scoring, address verification, suppression lists",
-  },
-  {
-    title: "Build a sending habit mailboxes trust",
-    plain:
-      "New domains start gently and grow with your volume, at a pace we set for you and you can override.",
-    technical: "Warm-up curve, hourly rate limits, retry policy, send windows",
-  },
-  {
-    title: "Handle failures and opt-outs cleanly",
-    plain:
-      "Failed addresses stop receiving mail automatically, and every unsubscribe is honoured immediately across all campaigns.",
-    technical: "Hard and soft bounce management, one-click unsubscribe, complaint feedback loops",
-  },
-  {
-    title: "Read the signals and act on them",
-    plain:
-      "Opens, clicks, quiet contacts, and complaints are watched over time, with a clear next move when something drifts.",
-    technical: "Engagement signals, reputation trend, re-permission sequences",
-  },
-] as const;
-
 export function Deliverability() {
   return (
     <section
@@ -49,36 +55,39 @@ export function Deliverability() {
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Deliverability"
-          title="Built for better deliverability"
-          lede="AI-powered deliverability optimization works on the things that are genuinely in your control — who you send to, how you send, and how you respond to what comes back. No platform can promise a mailbox provider's decision, and we won't pretend otherwise."
+          title="Built with deliverability in mind."
+          lede="Reaching the inbox starts long before you press Send. Oventric uses AI-powered deliverability optimization to monitor the signals you can control — authentication, audience quality, sending behaviour and engagement."
         />
 
-        <ol className="mt-16 grid gap-px border-t border-border sm:grid-cols-2 lg:grid-cols-3">
-          {areas.map((area, index) => (
-            <li key={area.title} className="border-b border-border bg-background p-6 sm:p-8">
-              <p className="font-mono text-xs text-accent">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-4 font-serif text-lg font-semibold text-foreground">
-                {area.title}
+        <div className="mt-16 grid gap-px border-y border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {pillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="bg-background p-6 transition-colors duration-300 hover:bg-muted/20 sm:p-8"
+            >
+              <pillar.icon className="h-5 w-5 text-accent" strokeWidth={1.5} aria-hidden />
+              <h3 className="mt-5 font-serif text-lg font-semibold text-foreground">
+                {pillar.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{area.plain}</p>
-              <details className="group mt-4">
-                <summary className="cursor-pointer list-none text-xs font-medium text-muted-foreground underline decoration-border underline-offset-4 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                  Advanced · what this is called
-                </summary>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  {area.technical}
-                </p>
-              </details>
-            </li>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pillar.body}</p>
+            </div>
           ))}
-        </ol>
+        </div>
 
-        <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          You will never see a guarantee of inbox placement here. You will see what has been set
-          up, what still needs attention, and what effect each fix is expected to have.
-        </p>
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+          <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            No platform can control a mailbox provider's final decision, and Oventric will never
+            guarantee inbox placement. What we do is set you up to earn trust, spot problems early,
+            and respond with a clear next step.
+          </p>
+          <p
+            className={cn(
+              "text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground",
+            )}
+          >
+            No guaranteed placement
+          </p>
+        </div>
       </div>
     </section>
   );
