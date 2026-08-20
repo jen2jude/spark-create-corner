@@ -40,6 +40,7 @@ function Index() {
       <ProductPreview />
       <TrustBand />
       <FromIdeaToResult />
+      <ExpertNotChatbot />
       <Features />
       <AudienceSegments />
       <ComplexityAbstraction />
