@@ -5,6 +5,7 @@ import { PositioningBar } from "@/components/PositioningBar";
 import { ProblemSection } from "@/components/ProblemSection";
 import { ProductPreview } from "@/components/ProductPreview";
 import { FromIdeaToResult } from "@/components/FromIdeaToResult";
+import { ExpertNotChatbot } from "@/components/ExpertNotChatbot";
 import { Features } from "@/components/Features";
 import { ComplexityAbstraction } from "@/components/ComplexityAbstraction";
 import { Deliverability } from "@/components/Deliverability";
@@ -39,6 +40,7 @@ function Index() {
       <ProductPreview />
       <TrustBand />
       <FromIdeaToResult />
+      <ExpertNotChatbot />
       <Features />
       <AudienceSegments />
       <ComplexityAbstraction />
