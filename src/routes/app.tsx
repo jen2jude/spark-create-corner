@@ -1,9 +1,14 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { AuthGate } from "@/components/app/AuthGate";
 
 /**
  * Application layout. Every product section lives under /app/*.
- * When authentication ships, this subtree moves behind the auth gate.
+ * Authentication is enforced at the application boundary.
  */
 export const Route = createFileRoute("/app")({
-  component: () => <Outlet />,
+  component: () => (
+    <AuthGate>
+      <Outlet />
+    </AuthGate>
+  ),
 });
